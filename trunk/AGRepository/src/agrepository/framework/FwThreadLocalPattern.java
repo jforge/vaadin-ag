@@ -7,13 +7,13 @@ import org.apache.log4j.Logger;
 import com.vaadin.Application;
 import com.vaadin.service.ApplicationContext;
 
-public class ThreadLocalPattern implements ApplicationContext.TransactionListener, Serializable {
-   private static final Logger LOG = Logger.getLogger(ThreadLocalPattern.class);
+public class FwThreadLocalPattern implements ApplicationContext.TransactionListener, Serializable {
+   private static final Logger LOG = Logger.getLogger(FwThreadLocalPattern.class);
    private static final long serialVersionUID = -2613987107755677286L;
-   private static ThreadLocal<ExtApplication> current = new ThreadLocal<ExtApplication>();
-   private ExtApplication application;
+   private static ThreadLocal<FwExtApplication> current = new ThreadLocal<FwExtApplication>();
+   private FwExtApplication application;
 
-   public ThreadLocalPattern(ExtApplication application) {
+   public FwThreadLocalPattern(FwExtApplication application) {
       this.application = application;
       application.getContext().addTransactionListener(this);
    }
@@ -21,7 +21,7 @@ public class ThreadLocalPattern implements ApplicationContext.TransactionListene
    @Override
    public void transactionStart(Application application, Object transactionData) {
       if ((this.application == application) && (current != null)) {
-         current.set((ExtApplication) application);
+         current.set((FwExtApplication) application);
       }
    }
 
@@ -32,7 +32,7 @@ public class ThreadLocalPattern implements ApplicationContext.TransactionListene
       }
    }
 
-   public static ExtApplication current() {
+   public static FwExtApplication current() {
       return current.get();
    }
 }

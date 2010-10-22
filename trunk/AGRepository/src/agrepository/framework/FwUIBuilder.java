@@ -6,16 +6,16 @@ import org.apache.log4j.Logger;
 
 import com.vaadin.ui.ComponentContainer;
 
-public class UIBuilder implements Serializable {
-   private static final Logger LOG = Logger.getLogger(UIBuilder.class);
+public class FwUIBuilder implements Serializable {
+   private static final Logger LOG = Logger.getLogger(FwUIBuilder.class);
    private static final long serialVersionUID = -2607922449734683983L;
    private ComponentContainer container;
 
-   public UIBuilder(ComponentContainer container) {
+   public FwUIBuilder(ComponentContainer container) {
       this.container = container;
    }
 
-   public ExtApplication getApplication() {
-      return ExtApplication.current();
+   public FwExtApplication getApplication() {
+      return FwExtApplication.current();
    }
 }
