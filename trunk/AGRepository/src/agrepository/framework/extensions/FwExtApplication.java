@@ -6,7 +6,8 @@ import java.util.Locale;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import agrepository.framework.utilities.FwParameters;
 import agrepository.framework.utilities.FwThreadLocalPattern;
@@ -19,7 +20,8 @@ import com.vaadin.terminal.Terminal;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
 
 public abstract class FwExtApplication extends Application {
-   private static final Logger LOG = Logger.getLogger(FwExtApplication.class);
+   @SuppressWarnings("unused")
+   private static final Log LOG = LogFactory.getLog(FwExtApplication.class);
    private static final long serialVersionUID = 5473629791987132392L;
    private FwThreadLocalPattern threadLocal;
    private FwParameters parameters;
@@ -33,8 +35,8 @@ public abstract class FwExtApplication extends Application {
       threadLocal = new FwThreadLocalPattern(this);
       threadLocal.transactionStart(this, null);
       parameters = new FwParameters();
-      setTheme(parameters.get("application.theme"));
-      setLocale(new Locale(parameters.get("application.locale")));
+      setTheme(parameters.getString("application.theme"));
+      setLocale(new Locale(parameters.getString("application.locale")));
       translator = new FwTranslator();
       FwExtWindow window = new FwExtWindow();
       window.setCaption(translator.get("application.title"));
@@ -61,14 +63,14 @@ public abstract class FwExtApplication extends Application {
 
    public File getTempDirectory() {
       if (temporaryDirectory == null) {
-         temporaryDirectory = new File(getBaseDirectory(), getServletContext().getInitParameter("temporaryDirectory"));
+         temporaryDirectory = new File(getBaseDirectory(), parameters.getString("temporaryDirectory"));
       }
       return temporaryDirectory;
    }
 
    @Override
    public String getVersion() {
-      return String.format("%s [%s]", parameters.get("application.name"), parameters.get("application.version"));
+      return String.format("%s [%s]", parameters.getString("application.name"), parameters.getString("application.version"));
    }
 
    public FwParameters getParameters() {

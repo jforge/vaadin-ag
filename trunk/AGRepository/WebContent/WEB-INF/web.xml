@@ -11,12 +11,7 @@
    <context-param>
       <description>Application configuration file</description>
       <param-name>parametersFile</param-name>
-      <param-value>WEB-INF/Parameters.properties</param-value>
-   </context-param>
-   <context-param>
-      <description>Application temporary directory</description>
-      <param-name>temporaryDirectory</param-name>
-      <param-value>WEB-INF/temp</param-value>
+      <param-value>WEB-INF/ApplicationParameters.properties</param-value>
    </context-param>
    <servlet>
       <servlet-name>AG Repository Application</servlet-name>

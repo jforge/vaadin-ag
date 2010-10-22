@@ -1,20 +1,19 @@
 package agrepository.framework.utilities;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.MissingResourceException;
-import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.configuration.CompositeConfiguration;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.configuration.SystemConfiguration;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import agrepository.framework.extensions.FwExtApplication;
 
-public class FwParameters extends Properties {
-   private static final Logger LOG = Logger.getLogger(FwParameters.class);
+public class FwParameters extends CompositeConfiguration {
+   private static final Log LOG = LogFactory.getLog(FwParameters.class);
    private static final long serialVersionUID = -6931501892578360133L;
-   private FwExtApplication application;
    private String parametersFile;
 
    public FwParameters() {
@@ -24,26 +23,11 @@ public class FwParameters extends Properties {
 
    public void refresh() {
       clear();
+      addConfiguration(new SystemConfiguration());
       try {
-         load(new FileInputStream(new File(FwExtApplication.current().getBaseDirectory(), parametersFile)));
-      } catch (FileNotFoundException e) {
-         e.printStackTrace();
-      } catch (IOException e) {
-         e.printStackTrace();
+         addConfiguration(new PropertiesConfiguration(new File(FwExtApplication.current().getBaseDirectory(), parametersFile)));
+      } catch (ConfigurationException exception) {
+         LOG.error(null, exception);
       }
-   }
-
-   public String get(String key) {
-      String value = getProperty(key);
-      if (FwUtils.isEmpty(value)) {
-         throw new MissingResourceException(
-                  FwUtils.format("Parameter %s not exist in configuration file %s", key, parametersFile), null, null);
-      }
-      return value;
-   }
-
-   public int getInt(String key) {
-      String value = get(key);
-      return Integer.valueOf(value);
    }
 }

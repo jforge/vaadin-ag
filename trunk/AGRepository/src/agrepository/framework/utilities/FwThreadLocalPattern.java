@@ -2,7 +2,8 @@ package agrepository.framework.utilities;
 
 import java.io.Serializable;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import agrepository.framework.extensions.FwExtApplication;
 
@@ -10,7 +11,8 @@ import com.vaadin.Application;
 import com.vaadin.service.ApplicationContext;
 
 public class FwThreadLocalPattern implements ApplicationContext.TransactionListener, Serializable {
-   private static final Logger LOG = Logger.getLogger(FwThreadLocalPattern.class);
+   @SuppressWarnings("unused")
+   private static final Log LOG = LogFactory.getLog(FwThreadLocalPattern.class);
    private static final long serialVersionUID = -2613987107755677286L;
    private static ThreadLocal<FwExtApplication> current = new ThreadLocal<FwExtApplication>();
    private FwExtApplication application;

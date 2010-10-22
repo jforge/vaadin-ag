@@ -7,7 +7,8 @@ import java.io.Serializable;
 import java.net.URL;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
@@ -25,7 +26,7 @@ import com.vaadin.ui.Window.CloseEvent;
 
 public abstract class FwListener implements Button.ClickListener, Property.ValueChangeListener, URIHandler, ParameterHandler,
          Upload.Receiver, Upload.FinishedListener, Table.ColumnGenerator, Window.CloseListener, Serializable {
-   private static final Logger LOG = Logger.getLogger(FwListener.class);
+   private static final Log LOG = LogFactory.getLog(FwListener.class);
    private static final long serialVersionUID = -5630629147168390726L;
    private ByteArrayOutputStream uploadData;
    private boolean lock;
@@ -53,9 +54,9 @@ public abstract class FwListener implements Button.ClickListener, Property.Value
          if (event.getReturnStream() != null) {
             return event.getReturnStream();
          } else if (event.getReturnData() != null) {
-            String type = event.getReturnDataType() != null ? event.getReturnDataType() : application.getParameters().get(
+            String type = event.getReturnDataType() != null ? event.getReturnDataType() : application.getParameters().getString(
                      "default.downloadMimeType");
-            String name = event.getReturnDataName() != null ? event.getReturnDataName() : application.getParameters().get(
+            String name = event.getReturnDataName() != null ? event.getReturnDataName() : application.getParameters().getString(
                      "default.downloadFileName");
             return new DownloadStream(new ByteArrayInputStream(event.getReturnData()), type, name);
          }

@@ -2,14 +2,16 @@ package agrepository.framework.utilities;
 
 import java.io.Serializable;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import agrepository.framework.extensions.FwExtApplication;
 
 import com.vaadin.ui.ComponentContainer;
 
 public class FwUIBuilder implements Serializable {
-   private static final Logger LOG = Logger.getLogger(FwUIBuilder.class);
+   @SuppressWarnings("unused")
+   private static final Log LOG = LogFactory.getLog(FwUIBuilder.class);
    private static final long serialVersionUID = -2607922449734683983L;
    private ComponentContainer container;
 
