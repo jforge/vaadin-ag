@@ -2,10 +2,12 @@ package agrepository.framework.utilities;
 
 import java.io.Serializable;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class FwUserData implements Serializable {
-   private static final Logger LOG = Logger.getLogger(FwUserData.class);
+   @SuppressWarnings("unused")
+   private static final Log LOG = LogFactory.getLog(FwUserData.class);
    private static final long serialVersionUID = -3076730510726507250L;
    private String username;
    private String name;

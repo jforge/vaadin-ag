@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.net.URL;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.vaadin.data.Property;
 import com.vaadin.terminal.DownloadStream;
@@ -17,7 +18,8 @@ import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.CloseEvent;
 
 public class FwEvent implements Serializable {
-   private static final Logger LOG = Logger.getLogger(FwEvent.class);
+   @SuppressWarnings("unused")
+   private static final Log LOG = LogFactory.getLog(FwEvent.class);
    private static final long serialVersionUID = -2603225525242512107L;
    private Button.ClickEvent clickEvent;
    private Property.ValueChangeEvent valueChangeEvent;

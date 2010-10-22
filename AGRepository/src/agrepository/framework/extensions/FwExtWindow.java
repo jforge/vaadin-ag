@@ -1,6 +1,7 @@
 package agrepository.framework.extensions;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import agrepository.framework.utilities.FwUIBuilder;
 
@@ -8,7 +9,8 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
 public class FwExtWindow extends Window {
-   private static final Logger LOG = Logger.getLogger(FwExtWindow.class);
+   @SuppressWarnings("unused")
+   private static final Log LOG = LogFactory.getLog(FwExtWindow.class);
    private static final long serialVersionUID = -3030706738593291963L;
    protected FwUIBuilder uiBuilder;
    protected VerticalLayout rootLayout;
