@@ -24,7 +24,7 @@
       <init-param>
          <description>Vaadin application class to start</description>
          <param-name>application</param-name>
-         <param-value>agrepository.AGRepositoryApplication</param-value>
+         <param-value>agrepository.Application</param-value>
       </init-param>
    </servlet>
    <servlet-mapping>
