@@ -10,8 +10,8 @@
    </context-param>
    <context-param>
       <description>Application configuration file</description>
-      <param-name>configurationFile</param-name>
-      <param-value>WEB-INF/configuration.properties</param-value>
+      <param-name>parametersFile</param-name>
+      <param-value>WEB-INF/Parameters.properties</param-value>
    </context-param>
    <context-param>
       <description>Application temporary directory</description>

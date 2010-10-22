@@ -13,8 +13,8 @@ public class Translator implements Serializable {
    private static final long serialVersionUID = 6987591647465154990L;
    private ResourceBundle resourceBundle = null;
 
-   public Translator(ExtApplication application) {
-      resourceBundle = ResourceBundle.getBundle(application.getConfiguration().get("application.resources"));
+   public Translator() {
+      resourceBundle = ResourceBundle.getBundle(ExtApplication.current().getParameters().get("application.resources"));
    }
 
    public void refresh() {

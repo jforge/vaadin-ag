@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import agrepository.framework.utilities.Configuration;
+import agrepository.framework.utilities.Parameters;
 import agrepository.framework.utilities.ThreadLocalPattern;
 import agrepository.framework.utilities.Translator;
 import agrepository.framework.utilities.UIBuilder;
@@ -22,7 +22,7 @@ public abstract class ExtApplication extends Application {
    private static final Logger LOG = Logger.getLogger(ExtApplication.class);
    private static final long serialVersionUID = 5473629791987132392L;
    private ThreadLocalPattern threadLocal;
-   private Configuration configuration;
+   private Parameters parameters;
    private Translator translator;
    private UIBuilder uiBuilder;
    private UserMessages userMessages;
@@ -32,14 +32,14 @@ public abstract class ExtApplication extends Application {
    public void init() {
       threadLocal = new ThreadLocalPattern(this);
       threadLocal.transactionStart(this, null);
-      configuration = new Configuration(this);
-      setTheme(configuration.get("application.theme"));
-      setLocale(new Locale(configuration.get("application.locale")));
-      translator = new Translator(this);
+      parameters = new Parameters();
+      setTheme(parameters.get("application.theme"));
+      setLocale(new Locale(parameters.get("application.locale")));
+      translator = new Translator();
       ExtWindow window = new ExtWindow();
       window.setCaption(translator.get("application.title"));
       setMainWindow(window);
-      userMessages = new UserMessages(this);
+      userMessages = new UserMessages();
       createUI();
    }
 
@@ -68,11 +68,11 @@ public abstract class ExtApplication extends Application {
 
    @Override
    public String getVersion() {
-      return String.format("%s [%s]", configuration.get("application.name"), configuration.get("application.version"));
+      return String.format("%s [%s]", parameters.get("application.name"), parameters.get("application.version"));
    }
 
-   public Configuration getConfiguration() {
-      return configuration;
+   public Parameters getParameters() {
+      return parameters;
    }
 
    public Translator getTranslator() {
@@ -107,7 +107,7 @@ public abstract class ExtApplication extends Application {
 
          @Override
          public void terminalError(Terminal.ErrorEvent event) {
-            userMessages.error("Unhandled Exception", event.getThrowable());
+            userMessages.error(translator.get("error.unhandledException"), event.getThrowable());
          }
       };
    }
@@ -115,11 +115,11 @@ public abstract class ExtApplication extends Application {
    @Override
    public void terminalError(Terminal.ErrorEvent event) {
       super.terminalError(event);
-      userMessages.error("Unhandled Exception", event.getThrowable());
+      userMessages.error(translator.get("error.unhandledException"), event.getThrowable());
    }
 
    public void refresh() {
-      configuration.refresh();
+      parameters.refresh();
       translator.refresh();
    }
 
