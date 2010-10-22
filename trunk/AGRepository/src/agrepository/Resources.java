@@ -13,8 +13,12 @@ public class Resources extends ListResourceBundle {
    }
 
    static final Object[][] contents = {
-      {
-               "application.title", "Application Generator Repository"
-      }
+            {
+                     "application.title", "Application Generator Repository"
+            }, {
+                     "error.unhandledException", "Unhandled exception"
+            }, {
+                     "error.missingWindow", "User messages require a window instance"
+            },
    };
 }

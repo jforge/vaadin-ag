@@ -15,13 +15,14 @@ import com.vaadin.ui.Window.Notification;
 public class UserMessages implements Serializable {
    private static final Logger LOG = Logger.getLogger(UserMessages.class);
    private static final long serialVersionUID = -2353972624960242281L;
-   private static final int MAX_DESCRIPTION_LINES = 20;
    private Window window;
+   private ExtApplication application;
 
-   public UserMessages(ExtApplication application) {
+   public UserMessages() {
+      application = ExtApplication.current();
       window = application.getMainWindow();
       if (window == null) {
-         throw new IllegalStateException("User messages require a window instance");
+         throw new IllegalStateException(application.getTranslator().get("error.missingWindow"));
       }
    }
 
@@ -33,33 +34,33 @@ public class UserMessages implements Serializable {
       error(message, description, null);
    }
 
-   public void error(String message, String description, Throwable t) {
-      if (t != null) {
+   public void error(String message, String description, Throwable throwable) {
+      if (throwable != null) {
          ByteArrayOutputStream baos = new ByteArrayOutputStream();
          PrintStream ps = new PrintStream(baos, false);
-         t.printStackTrace(ps);
+         throwable.printStackTrace(ps);
          ps.flush();
          try {
             baos.flush();
          } catch (IOException ignored) {
          }
-         String s = baos.toString();
-         t.printStackTrace();
+         String value = baos.toString();
+         throwable.printStackTrace();
          if (description == null) {
-            description = s;
+            description = value;
          } else {
-            description += ":\n" + s;
+            description += ":\n" + value;
          }
       }
       window.showNotification(Utils.escapeXML(message), formatDescription(description), Notification.TYPE_ERROR_MESSAGE);
    }
 
-   public void error(String message, Throwable t) {
-      error(message, null, t);
+   public void error(String message, Throwable throwable) {
+      error(message, null, throwable);
    }
 
-   public void error(Throwable e) {
-      error("Unhandled Exception", null, e);
+   public void error(Throwable throwable) {
+      error(application.getTranslator().get("error.unhandledException"), null, throwable);
    }
 
    public void warning(String message) {
@@ -99,27 +100,28 @@ public class UserMessages implements Serializable {
          description = Utils.escapeXML(description);
          description = description.replaceAll("\n", "<br/>");
          if (description.length() > 80) {
-            String orig = description;
+            String descriptionTemp = description;
             description = "";
-            while (orig.length() > 0) {
-               int last = Math.min(80, orig.length());
-               description += orig.substring(0, last);
-               int lastnl = description.lastIndexOf("<br");
-               int lastwb = description.lastIndexOf(' ');
-               if ((lastwb - lastnl > 10) && (lastwb < description.length() - 1)) {
-                  description = description.substring(0, lastwb) + "<br/>" + description.substring(lastwb);
+            while (descriptionTemp.length() > 0) {
+               int last = Math.min(80, descriptionTemp.length());
+               description += descriptionTemp.substring(0, last);
+               int lastNL = description.lastIndexOf("<br");
+               int lastWB = description.lastIndexOf(' ');
+               if ((lastWB - lastNL > 10) && (lastWB < description.length() - 1)) {
+                  description = description.substring(0, lastWB) + "<br/>" + description.substring(lastWB);
                }
-               orig = last == orig.length() ? "" : orig.substring(last);
+               descriptionTemp = last == descriptionTemp.length() ? "" : descriptionTemp.substring(last);
             }
          }
-         int pos = description.indexOf("<br");
+         int position = description.indexOf("<br");
          int lineCount = 1;
-         while ((lineCount < MAX_DESCRIPTION_LINES) && (pos > 0) && (pos < description.length())) {
-            pos = description.indexOf("<br", pos + 3);
+         while ((lineCount < application.getParameters().getInt("default.descriptionLines")) && (position > 0)
+                  && (position < description.length())) {
+            position = description.indexOf("<br", position + 3);
             lineCount++;
          }
-         if ((pos > 0) && (lineCount >= MAX_DESCRIPTION_LINES)) {
-            description = description.substring(0, pos) + "<br/>(...)";
+         if ((position > 0) && (lineCount >= application.getParameters().getInt("default.descriptionLines"))) {
+            description = description.substring(0, position) + "<br/>(...)";
          }
       }
       return description;
