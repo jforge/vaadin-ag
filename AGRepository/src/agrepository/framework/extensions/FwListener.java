@@ -1,4 +1,4 @@
-package agrepository.framework;
+package agrepository.framework.extensions;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

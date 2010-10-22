@@ -1,8 +1,10 @@
-package agrepository.framework;
+package agrepository.framework.utilities;
 
 import java.io.Serializable;
 
 import org.apache.log4j.Logger;
+
+import agrepository.framework.extensions.FwExtApplication;
 
 import com.vaadin.ui.ComponentContainer;
 

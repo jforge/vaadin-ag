@@ -1,4 +1,4 @@
-package agrepository.framework;
+package agrepository.framework.extensions;
 
 import java.io.File;
 import java.util.Locale;
@@ -7,6 +7,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+
+import agrepository.framework.utilities.FwParameters;
+import agrepository.framework.utilities.FwThreadLocalPattern;
+import agrepository.framework.utilities.FwTranslator;
+import agrepository.framework.utilities.FwUIBuilder;
+import agrepository.framework.utilities.FwUserMessages;
 
 import com.vaadin.Application;
 import com.vaadin.terminal.Terminal;

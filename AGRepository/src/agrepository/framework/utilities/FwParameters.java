@@ -1,4 +1,4 @@
-package agrepository.framework;
+package agrepository.framework.utilities;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,6 +8,8 @@ import java.util.MissingResourceException;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+
+import agrepository.framework.extensions.FwExtApplication;
 
 public class FwParameters extends Properties {
    private static final Logger LOG = Logger.getLogger(FwParameters.class);

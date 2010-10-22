@@ -1,4 +1,4 @@
-package agrepository.framework;
+package agrepository.framework.extensions;
 
 import java.io.Serializable;
 import java.net.URL;

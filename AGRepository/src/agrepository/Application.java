@@ -2,7 +2,7 @@ package agrepository;
 
 import org.apache.log4j.Logger;
 
-import agrepository.framework.FwExtApplication;
+import agrepository.framework.extensions.FwExtApplication;
 
 public class Application extends FwExtApplication {
    private static final Logger LOG = Logger.getLogger(Application.class);

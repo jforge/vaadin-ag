@@ -1,4 +1,4 @@
-package agrepository.framework;
+package agrepository.framework.utilities;
 
 import java.io.Serializable;
 

@@ -1,6 +1,8 @@
-package agrepository.framework;
+package agrepository.framework.extensions;
 
 import org.apache.log4j.Logger;
+
+import agrepository.framework.utilities.FwUIBuilder;
 
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
