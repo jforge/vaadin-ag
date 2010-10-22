@@ -8,12 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import agrepository.framework.utilities.Parameters;
-import agrepository.framework.utilities.ThreadLocalPattern;
-import agrepository.framework.utilities.Translator;
-import agrepository.framework.utilities.UIBuilder;
-import agrepository.framework.utilities.UserMessages;
-
 import com.vaadin.Application;
 import com.vaadin.terminal.Terminal;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
@@ -22,7 +16,7 @@ public abstract class ExtApplication extends Application {
    private static final Logger LOG = Logger.getLogger(ExtApplication.class);
    private static final long serialVersionUID = 5473629791987132392L;
    private ThreadLocalPattern threadLocal;
-   private Parameters parameters;
+   private FwParameters parameters;
    private Translator translator;
    private UIBuilder uiBuilder;
    private UserMessages userMessages;
@@ -32,7 +26,7 @@ public abstract class ExtApplication extends Application {
    public void init() {
       threadLocal = new ThreadLocalPattern(this);
       threadLocal.transactionStart(this, null);
-      parameters = new Parameters();
+      parameters = new FwParameters();
       setTheme(parameters.get("application.theme"));
       setLocale(new Locale(parameters.get("application.locale")));
       translator = new Translator();
@@ -71,7 +65,7 @@ public abstract class ExtApplication extends Application {
       return String.format("%s [%s]", parameters.get("application.name"), parameters.get("application.version"));
    }
 
-   public Parameters getParameters() {
+   public FwParameters getParameters() {
       return parameters;
    }
 

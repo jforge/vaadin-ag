@@ -23,15 +23,15 @@ import com.vaadin.ui.Upload.FinishedEvent;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.CloseEvent;
 
-public abstract class ExtListener implements Button.ClickListener, Property.ValueChangeListener, URIHandler, ParameterHandler,
+public abstract class Listener implements Button.ClickListener, Property.ValueChangeListener, URIHandler, ParameterHandler,
          Upload.Receiver, Upload.FinishedListener, Table.ColumnGenerator, Window.CloseListener, Serializable {
-   private static final Logger LOG = Logger.getLogger(ExtListener.class);
+   private static final Logger LOG = Logger.getLogger(Listener.class);
    private static final long serialVersionUID = -5630629147168390726L;
    private ByteArrayOutputStream uploadData;
    private boolean lock;
    private ExtApplication application;
 
-   public ExtListener() {
+   public Listener() {
       application = ExtApplication.current();
    }
 
@@ -48,7 +48,7 @@ public abstract class ExtListener implements Button.ClickListener, Property.Valu
    @Override
    public DownloadStream handleURI(URL context, String relativeURI) {
       try {
-         ExtEvent event = new ExtEvent(context, relativeURI);
+         Event event = new Event(context, relativeURI);
          execOnce(event);
          if (event.getReturnStream() != null) {
             return event.getReturnStream();
@@ -81,7 +81,7 @@ public abstract class ExtListener implements Button.ClickListener, Property.Valu
    @Override
    public void handleParameters(Map<String, String[]> parameters) {
       try {
-         execOnce(new ExtEvent(parameters));
+         execOnce(new Event(parameters));
       } catch (Throwable throwable) {
          unhandledError(throwable);
       }
@@ -90,7 +90,7 @@ public abstract class ExtListener implements Button.ClickListener, Property.Valu
    @Override
    public void valueChange(ValueChangeEvent event) {
       try {
-         execOnce(new ExtEvent(event));
+         execOnce(new Event(event));
       } catch (Throwable throwable) {
          unhandledError(throwable);
       }
@@ -99,7 +99,7 @@ public abstract class ExtListener implements Button.ClickListener, Property.Valu
    @Override
    public void buttonClick(ClickEvent event) {
       try {
-         execOnce(new ExtEvent(event));
+         execOnce(new Event(event));
       } catch (Throwable throwable) {
          unhandledError(throwable);
       }
@@ -107,7 +107,7 @@ public abstract class ExtListener implements Button.ClickListener, Property.Valu
 
    @Override
    public Component generateCell(Table source, Object itemId, Object columnId) {
-      ExtEvent event = new ExtEvent(source, itemId, columnId);
+      Event event = new Event(source, itemId, columnId);
       try {
          execOnce(event);
          return event.getReturnComponent();
@@ -120,13 +120,13 @@ public abstract class ExtListener implements Button.ClickListener, Property.Valu
    @Override
    public void windowClose(CloseEvent event) {
       try {
-         execOnce(new ExtEvent(event));
+         execOnce(new Event(event));
       } catch (Throwable throwable) {
          unhandledError(throwable);
       }
    }
 
-   protected synchronized void execOnce(ExtEvent event) throws Exception {
+   protected synchronized void execOnce(Event event) throws Exception {
       if (lock) {
          return;
       }
@@ -140,5 +140,5 @@ public abstract class ExtListener implements Button.ClickListener, Property.Valu
       }
    }
 
-   public abstract void exec(ExtEvent event) throws Exception;
+   public abstract void exec(Event event) throws Exception;
 }

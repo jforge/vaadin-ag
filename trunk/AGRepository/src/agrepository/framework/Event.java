@@ -16,8 +16,8 @@ import com.vaadin.ui.Upload.FinishedEvent;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.CloseEvent;
 
-public class ExtEvent implements Serializable {
-   private static final Logger LOG = Logger.getLogger(ExtEvent.class);
+public class Event implements Serializable {
+   private static final Logger LOG = Logger.getLogger(Event.class);
    private static final long serialVersionUID = -2603225525242512107L;
    private Button.ClickEvent clickEvent;
    private Property.ValueChangeEvent valueChangeEvent;
@@ -38,39 +38,39 @@ public class ExtEvent implements Serializable {
    private int[] modifiers;
    private int key;
 
-   public ExtEvent(Upload.FinishedEvent event, byte[] data) {
+   public Event(Upload.FinishedEvent event, byte[] data) {
       finishedEvent = event;
       this.data = data;
    }
 
-   public ExtEvent(Button.ClickEvent event) {
+   public Event(Button.ClickEvent event) {
       clickEvent = event;
    }
 
-   public ExtEvent(Property.ValueChangeEvent event) {
+   public Event(Property.ValueChangeEvent event) {
       valueChangeEvent = event;
    }
 
-   public ExtEvent(Map<String, String[]> parameters) {
+   public Event(Map<String, String[]> parameters) {
       this.parameters = parameters;
    }
 
-   public ExtEvent(URL contextURL, String relativeURI) {
+   public Event(URL contextURL, String relativeURI) {
       this.contextURL = contextURL;
       this.relativeURI = relativeURI;
    }
 
-   public ExtEvent(Table table, Object itemId, Object columnId) {
+   public Event(Table table, Object itemId, Object columnId) {
       this.table = table;
       this.itemId = itemId;
       this.columnId = columnId;
    }
 
-   public ExtEvent(CloseEvent event) {
+   public Event(CloseEvent event) {
       closeEvent = event;
    }
 
-   public ExtEvent(int key, int[] modifiers) {
+   public Event(int key, int[] modifiers) {
       this.key = key;
       this.modifiers = modifiers;
    }
