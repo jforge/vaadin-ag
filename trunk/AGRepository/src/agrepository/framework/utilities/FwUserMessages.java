@@ -1,4 +1,4 @@
-package agrepository.framework;
+package agrepository.framework.utilities;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -6,6 +6,8 @@ import java.io.PrintStream;
 import java.io.Serializable;
 
 import org.apache.log4j.Logger;
+
+import agrepository.framework.extensions.FwExtApplication;
 
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.Notification;

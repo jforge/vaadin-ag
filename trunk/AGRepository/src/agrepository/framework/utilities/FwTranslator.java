@@ -1,10 +1,12 @@
-package agrepository.framework;
+package agrepository.framework.utilities;
 
 import java.io.Serializable;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
+
+import agrepository.framework.extensions.FwExtApplication;
 
 public class FwTranslator implements Serializable {
    private static final Logger LOG = Logger.getLogger(FwTranslator.class);
