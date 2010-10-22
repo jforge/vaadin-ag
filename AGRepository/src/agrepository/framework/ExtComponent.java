@@ -2,8 +2,6 @@ package agrepository.framework;
 
 import org.apache.log4j.Logger;
 
-import agrepository.framework.utilities.UIBuilder;
-
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.VerticalLayout;
 
