@@ -12,18 +12,18 @@ import org.apache.log4j.Logger;
 public class FwParameters extends Properties {
    private static final Logger LOG = Logger.getLogger(FwParameters.class);
    private static final long serialVersionUID = -6931501892578360133L;
-   private ExtApplication application;
+   private FwExtApplication application;
    private String parametersFile;
 
    public FwParameters() {
-      parametersFile = ExtApplication.current().getServletContext().getInitParameter("parametersFile");
+      parametersFile = FwExtApplication.current().getServletContext().getInitParameter("parametersFile");
       refresh();
    }
 
    public void refresh() {
       clear();
       try {
-         load(new FileInputStream(new File(ExtApplication.current().getBaseDirectory(), parametersFile)));
+         load(new FileInputStream(new File(FwExtApplication.current().getBaseDirectory(), parametersFile)));
       } catch (FileNotFoundException e) {
          e.printStackTrace();
       } catch (IOException e) {

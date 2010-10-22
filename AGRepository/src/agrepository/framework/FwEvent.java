@@ -16,8 +16,8 @@ import com.vaadin.ui.Upload.FinishedEvent;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.CloseEvent;
 
-public class Event implements Serializable {
-   private static final Logger LOG = Logger.getLogger(Event.class);
+public class FwEvent implements Serializable {
+   private static final Logger LOG = Logger.getLogger(FwEvent.class);
    private static final long serialVersionUID = -2603225525242512107L;
    private Button.ClickEvent clickEvent;
    private Property.ValueChangeEvent valueChangeEvent;
@@ -38,39 +38,39 @@ public class Event implements Serializable {
    private int[] modifiers;
    private int key;
 
-   public Event(Upload.FinishedEvent event, byte[] data) {
+   public FwEvent(Upload.FinishedEvent event, byte[] data) {
       finishedEvent = event;
       this.data = data;
    }
 
-   public Event(Button.ClickEvent event) {
+   public FwEvent(Button.ClickEvent event) {
       clickEvent = event;
    }
 
-   public Event(Property.ValueChangeEvent event) {
+   public FwEvent(Property.ValueChangeEvent event) {
       valueChangeEvent = event;
    }
 
-   public Event(Map<String, String[]> parameters) {
+   public FwEvent(Map<String, String[]> parameters) {
       this.parameters = parameters;
    }
 
-   public Event(URL contextURL, String relativeURI) {
+   public FwEvent(URL contextURL, String relativeURI) {
       this.contextURL = contextURL;
       this.relativeURI = relativeURI;
    }
 
-   public Event(Table table, Object itemId, Object columnId) {
+   public FwEvent(Table table, Object itemId, Object columnId) {
       this.table = table;
       this.itemId = itemId;
       this.columnId = columnId;
    }
 
-   public Event(CloseEvent event) {
+   public FwEvent(CloseEvent event) {
       closeEvent = event;
    }
 
-   public Event(int key, int[] modifiers) {
+   public FwEvent(int key, int[] modifiers) {
       this.key = key;
       this.modifiers = modifiers;
    }

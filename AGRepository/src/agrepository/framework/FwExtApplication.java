@@ -12,28 +12,28 @@ import com.vaadin.Application;
 import com.vaadin.terminal.Terminal;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
 
-public abstract class ExtApplication extends Application {
-   private static final Logger LOG = Logger.getLogger(ExtApplication.class);
+public abstract class FwExtApplication extends Application {
+   private static final Logger LOG = Logger.getLogger(FwExtApplication.class);
    private static final long serialVersionUID = 5473629791987132392L;
-   private ThreadLocalPattern threadLocal;
+   private FwThreadLocalPattern threadLocal;
    private FwParameters parameters;
-   private Translator translator;
-   private UIBuilder uiBuilder;
-   private UserMessages userMessages;
+   private FwTranslator translator;
+   private FwUIBuilder uiBuilder;
+   private FwUserMessages userMessages;
    private File temporaryDirectory;
 
    @Override
    public void init() {
-      threadLocal = new ThreadLocalPattern(this);
+      threadLocal = new FwThreadLocalPattern(this);
       threadLocal.transactionStart(this, null);
       parameters = new FwParameters();
       setTheme(parameters.get("application.theme"));
       setLocale(new Locale(parameters.get("application.locale")));
-      translator = new Translator();
-      ExtWindow window = new ExtWindow();
+      translator = new FwTranslator();
+      FwExtWindow window = new FwExtWindow();
       window.setCaption(translator.get("application.title"));
       setMainWindow(window);
-      userMessages = new UserMessages();
+      userMessages = new FwUserMessages();
       createUI();
    }
 
@@ -69,15 +69,15 @@ public abstract class ExtApplication extends Application {
       return parameters;
    }
 
-   public Translator getTranslator() {
+   public FwTranslator getTranslator() {
       return translator;
    }
 
-   public UIBuilder getUIBuilder() {
+   public FwUIBuilder getUIBuilder() {
       return uiBuilder;
    }
 
-   public UserMessages getUserMessages() {
+   public FwUserMessages getUserMessages() {
       return userMessages;
    }
 
@@ -90,8 +90,8 @@ public abstract class ExtApplication extends Application {
       }
    }
 
-   public static ExtApplication current() {
-      return ThreadLocalPattern.current();
+   public static FwExtApplication current() {
+      return FwThreadLocalPattern.current();
    }
 
    @Override

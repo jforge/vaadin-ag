@@ -10,14 +10,14 @@ import org.apache.log4j.Logger;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.Notification;
 
-public class UserMessages implements Serializable {
-   private static final Logger LOG = Logger.getLogger(UserMessages.class);
+public class FwUserMessages implements Serializable {
+   private static final Logger LOG = Logger.getLogger(FwUserMessages.class);
    private static final long serialVersionUID = -2353972624960242281L;
    private Window window;
-   private ExtApplication application;
+   private FwExtApplication application;
 
-   public UserMessages() {
-      application = ExtApplication.current();
+   public FwUserMessages() {
+      application = FwExtApplication.current();
       window = application.getMainWindow();
       if (window == null) {
          throw new IllegalStateException(application.getTranslator().get("error.missingWindow"));

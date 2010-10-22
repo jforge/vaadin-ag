@@ -5,20 +5,20 @@ import org.apache.log4j.Logger;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.VerticalLayout;
 
-public abstract class ExtComponent extends CustomComponent {
-   private static final Logger LOG = Logger.getLogger(ExtComponent.class);
+public abstract class FwExtComponent extends CustomComponent {
+   private static final Logger LOG = Logger.getLogger(FwExtComponent.class);
    private static final long serialVersionUID = -4988692704729896908L;
    protected VerticalLayout rootLayout;
-   protected UIBuilder uiBuilder;
+   protected FwUIBuilder uiBuilder;
 
-   public ExtComponent() {
+   public FwExtComponent() {
       this(true);
    }
 
-   public ExtComponent(boolean initUI) {
+   public FwExtComponent(boolean initUI) {
       rootLayout = new VerticalLayout();
       setCompositionRoot(rootLayout);
-      uiBuilder = new UIBuilder(rootLayout);
+      uiBuilder = new FwUIBuilder(rootLayout);
       if (initUI) {
          createUI();
       }

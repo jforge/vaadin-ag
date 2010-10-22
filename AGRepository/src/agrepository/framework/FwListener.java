@@ -23,16 +23,16 @@ import com.vaadin.ui.Upload.FinishedEvent;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.CloseEvent;
 
-public abstract class Listener implements Button.ClickListener, Property.ValueChangeListener, URIHandler, ParameterHandler,
+public abstract class FwListener implements Button.ClickListener, Property.ValueChangeListener, URIHandler, ParameterHandler,
          Upload.Receiver, Upload.FinishedListener, Table.ColumnGenerator, Window.CloseListener, Serializable {
-   private static final Logger LOG = Logger.getLogger(Listener.class);
+   private static final Logger LOG = Logger.getLogger(FwListener.class);
    private static final long serialVersionUID = -5630629147168390726L;
    private ByteArrayOutputStream uploadData;
    private boolean lock;
-   private ExtApplication application;
+   private FwExtApplication application;
 
-   public Listener() {
-      application = ExtApplication.current();
+   public FwListener() {
+      application = FwExtApplication.current();
    }
 
    @Override
@@ -48,7 +48,7 @@ public abstract class Listener implements Button.ClickListener, Property.ValueCh
    @Override
    public DownloadStream handleURI(URL context, String relativeURI) {
       try {
-         Event event = new Event(context, relativeURI);
+         FwEvent event = new FwEvent(context, relativeURI);
          execOnce(event);
          if (event.getReturnStream() != null) {
             return event.getReturnStream();
@@ -70,7 +70,7 @@ public abstract class Listener implements Button.ClickListener, Property.ValueCh
    }
 
    public void unhandledError(String message, Throwable t) {
-      ExtApplication application = ExtApplication.current();
+      FwExtApplication application = FwExtApplication.current();
       if ((application != null) && (application.getUserMessages() != null)) {
          application.getUserMessages().error(message, t);
       } else {
@@ -81,7 +81,7 @@ public abstract class Listener implements Button.ClickListener, Property.ValueCh
    @Override
    public void handleParameters(Map<String, String[]> parameters) {
       try {
-         execOnce(new Event(parameters));
+         execOnce(new FwEvent(parameters));
       } catch (Throwable throwable) {
          unhandledError(throwable);
       }
@@ -90,7 +90,7 @@ public abstract class Listener implements Button.ClickListener, Property.ValueCh
    @Override
    public void valueChange(ValueChangeEvent event) {
       try {
-         execOnce(new Event(event));
+         execOnce(new FwEvent(event));
       } catch (Throwable throwable) {
          unhandledError(throwable);
       }
@@ -99,7 +99,7 @@ public abstract class Listener implements Button.ClickListener, Property.ValueCh
    @Override
    public void buttonClick(ClickEvent event) {
       try {
-         execOnce(new Event(event));
+         execOnce(new FwEvent(event));
       } catch (Throwable throwable) {
          unhandledError(throwable);
       }
@@ -107,7 +107,7 @@ public abstract class Listener implements Button.ClickListener, Property.ValueCh
 
    @Override
    public Component generateCell(Table source, Object itemId, Object columnId) {
-      Event event = new Event(source, itemId, columnId);
+      FwEvent event = new FwEvent(source, itemId, columnId);
       try {
          execOnce(event);
          return event.getReturnComponent();
@@ -120,13 +120,13 @@ public abstract class Listener implements Button.ClickListener, Property.ValueCh
    @Override
    public void windowClose(CloseEvent event) {
       try {
-         execOnce(new Event(event));
+         execOnce(new FwEvent(event));
       } catch (Throwable throwable) {
          unhandledError(throwable);
       }
    }
 
-   protected synchronized void execOnce(Event event) throws Exception {
+   protected synchronized void execOnce(FwEvent event) throws Exception {
       if (lock) {
          return;
       }
@@ -140,5 +140,5 @@ public abstract class Listener implements Button.ClickListener, Property.ValueCh
       }
    }
 
-   public abstract void exec(Event event) throws Exception;
+   public abstract void exec(FwEvent event) throws Exception;
 }

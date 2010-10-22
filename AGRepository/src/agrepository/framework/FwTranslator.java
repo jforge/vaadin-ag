@@ -6,13 +6,13 @@ import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
 
-public class Translator implements Serializable {
-   private static final Logger LOG = Logger.getLogger(Translator.class);
+public class FwTranslator implements Serializable {
+   private static final Logger LOG = Logger.getLogger(FwTranslator.class);
    private static final long serialVersionUID = 6987591647465154990L;
    private ResourceBundle resourceBundle = null;
 
-   public Translator() {
-      resourceBundle = ResourceBundle.getBundle(ExtApplication.current().getParameters().get("application.resources"));
+   public FwTranslator() {
+      resourceBundle = ResourceBundle.getBundle(FwExtApplication.current().getParameters().get("application.resources"));
    }
 
    public void refresh() {
