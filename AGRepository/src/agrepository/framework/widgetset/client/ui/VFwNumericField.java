@@ -14,10 +14,11 @@ import com.vaadin.terminal.gwt.client.ui.VTextField;
 public class VFwNumericField extends VTextField {
    private char separatorChar;
    private Boolean onlyIntegerValues;
-   private Boolean onlyPositiveValues;
    private boolean specialKeyDown;
    private boolean hasSign;
    private boolean hasSeparator;
+   private boolean hasPositiveSign;
+   private boolean hasNegativeSign;
    private KeyDownHandler keyDownHandler = new KeyDownHandler() {
       @Override
       public void onKeyDown(KeyDownEvent event) {
@@ -39,12 +40,14 @@ public class VFwNumericField extends VTextField {
       @Override
       public void onKeyPress(KeyPressEvent event) {
          char charCode = event.getCharCode();
-         if ((('0' <= charCode) && (charCode <= '9')) || (charCode == '+') || (charCode == '-')
-                  || (!onlyIntegerValues && (charCode == separatorChar))) {
-            if (hasSign && ((charCode == '+') || (charCode == '-'))) {
+         if ((('0' <= charCode) && (charCode <= '9')) || (charCode == '+') || (charCode == '-') || (charCode == separatorChar)) {
+            if (!onlyIntegerValues && hasSeparator && (charCode == separatorChar)) {
                event.preventDefault();
             }
-            if (hasSeparator && (!onlyIntegerValues && (charCode == separatorChar))) {
+            if ((getCursorPos() != 0) && ((charCode == '+') || (charCode == '-'))) {
+               event.preventDefault();
+            }
+            if ((hasPositiveSign || hasNegativeSign) && ((charCode == '+') || (charCode == '-'))) {
                event.preventDefault();
             }
          } else if (!specialKeyDown) {
@@ -56,7 +59,9 @@ public class VFwNumericField extends VTextField {
       @Override
       public void onKeyUp(KeyUpEvent event) {
          if (getValue() != null) {
-            hasSign = getValue().length() > 0;
+            String sign = getValue().substring(0, 1);
+            hasPositiveSign = "+".equals(sign);
+            hasNegativeSign = "-".equals(sign);
             hasSeparator = !onlyIntegerValues && getValue().contains(Character.toString(separatorChar));
          } else {
             hasSign = false;
@@ -75,9 +80,6 @@ public class VFwNumericField extends VTextField {
       }
       if (uidl.hasAttribute("onlyIntegerValues")) {
          onlyIntegerValues = uidl.getBooleanAttribute("onlyIntegerValues");
-      }
-      if (uidl.hasAttribute("onlyPositiveValues")) {
-         onlyPositiveValues = uidl.getBooleanAttribute("onlyPositiveValues");
       }
    }
 
