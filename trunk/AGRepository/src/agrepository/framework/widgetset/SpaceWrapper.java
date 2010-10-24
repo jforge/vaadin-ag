@@ -1,6 +1,6 @@
-package agrepository.framework.widgetset.spacewrapper;
+package agrepository.framework.widgetset;
 
-import agrepository.framework.widgetset.spacewrapper.client.ui.VSpaceWrapper;
+import agrepository.framework.widgetset.client.ui.VSpaceWrapper;
 
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;

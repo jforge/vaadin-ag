@@ -1,6 +1,6 @@
-package agrepository.framework.widgetset.maskedtextfield;
+package agrepository.framework.widgetset;
 
-import agrepository.framework.widgetset.maskedtextfield.client.ui.VMaskedTextField;
+import agrepository.framework.widgetset.client.ui.VMaskedTextField;
 
 import com.vaadin.data.Property;
 import com.vaadin.terminal.PaintException;

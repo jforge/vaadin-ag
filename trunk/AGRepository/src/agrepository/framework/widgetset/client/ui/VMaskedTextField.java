@@ -1,4 +1,4 @@
-package agrepository.framework.widgetset.maskedtextfield.client.ui;
+package agrepository.framework.widgetset.client.ui;
 
 import java.util.ArrayList;
 import java.util.List;

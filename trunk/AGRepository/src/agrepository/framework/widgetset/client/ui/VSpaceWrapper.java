@@ -1,4 +1,4 @@
-package agrepository.framework.widgetset.spacewrapper.client.ui;
+package agrepository.framework.widgetset.client.ui;
 
 import java.util.Set;
 
