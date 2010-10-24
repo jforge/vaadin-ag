@@ -6,7 +6,6 @@ import com.vaadin.data.validator.AbstractStringValidator;
 public class FwFloatValidator extends AbstractStringValidator {
    public FwFloatValidator(String errorMessage) {
       super(errorMessage);
-      // TODO Auto-generated constructor stub
    }
 
    @Override

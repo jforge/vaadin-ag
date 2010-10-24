@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import agrepository.framework.extensions.FwExtApplication;
+import agrepository.framework.extensions.FwApplication;
 
 public class FwTranslator implements Serializable {
    @SuppressWarnings("unused")
@@ -16,7 +16,7 @@ public class FwTranslator implements Serializable {
    private ResourceBundle resourceBundle = null;
 
    public FwTranslator() {
-      resourceBundle = ResourceBundle.getBundle(FwExtApplication.current().getParameters().getString("application.resources"));
+      resourceBundle = ResourceBundle.getBundle(FwApplication.current().getParameters().getString("application.resources"));
    }
 
    public void refresh() {

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import agrepository.framework.extensions.FwExtApplication;
+import agrepository.framework.extensions.FwApplication;
 
 import com.vaadin.ui.ComponentContainer;
 
@@ -19,7 +19,7 @@ public class FwUIBuilder implements Serializable {
       this.container = container;
    }
 
-   public FwExtApplication getApplication() {
-      return FwExtApplication.current();
+   public FwApplication getApplication() {
+      return FwApplication.current();
    }
 }

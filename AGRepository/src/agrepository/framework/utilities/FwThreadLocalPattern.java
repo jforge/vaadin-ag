@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import agrepository.framework.extensions.FwExtApplication;
+import agrepository.framework.extensions.FwApplication;
 
 import com.vaadin.Application;
 import com.vaadin.service.ApplicationContext;
@@ -14,10 +14,10 @@ public class FwThreadLocalPattern implements ApplicationContext.TransactionListe
    @SuppressWarnings("unused")
    private static final Log LOG = LogFactory.getLog(FwThreadLocalPattern.class);
    private static final long serialVersionUID = -2613987107755677286L;
-   private static ThreadLocal<FwExtApplication> current = new ThreadLocal<FwExtApplication>();
-   private FwExtApplication application;
+   private static ThreadLocal<FwApplication> current = new ThreadLocal<FwApplication>();
+   private FwApplication application;
 
-   public FwThreadLocalPattern(FwExtApplication application) {
+   public FwThreadLocalPattern(FwApplication application) {
       this.application = application;
       application.getContext().addTransactionListener(this);
    }
@@ -25,7 +25,7 @@ public class FwThreadLocalPattern implements ApplicationContext.TransactionListe
    @Override
    public void transactionStart(Application application, Object transactionData) {
       if ((this.application == application) && (current != null)) {
-         current.set((FwExtApplication) application);
+         current.set((FwApplication) application);
       }
    }
 
@@ -36,7 +36,7 @@ public class FwThreadLocalPattern implements ApplicationContext.TransactionListe
       }
    }
 
-   public static FwExtApplication current() {
+   public static FwApplication current() {
       return current.get();
    }
 }
