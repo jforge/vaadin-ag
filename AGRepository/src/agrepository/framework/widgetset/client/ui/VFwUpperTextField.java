@@ -10,19 +10,20 @@ public class VFwUpperTextField extends VTextField {
       @Override
       public void onKeyUp(KeyUpEvent event) {
          int nativeKeyCode = event.getNativeKeyCode();
-         int curPos = getCursorPos();
-         if (!event.isAnyModifierKeyDown() && !event.isMetaKeyDown() && !event.isShiftKeyDown() && !event.isDownArrow()
-                  && !event.isLeftArrow() && !event.isRightArrow() && !event.isUpArrow() && (nativeKeyCode != KeyCodes.KEY_END)
+         if (!event.isAnyModifierKeyDown() && !event.isAltKeyDown() && !event.isControlKeyDown() && !event.isShiftKeyDown()
+                  && !event.isMetaKeyDown() && !event.isShiftKeyDown() && !event.isDownArrow() && !event.isLeftArrow()
+                  && !event.isRightArrow() && !event.isUpArrow() && (nativeKeyCode != KeyCodes.KEY_END)
                   && (nativeKeyCode != KeyCodes.KEY_HOME) && (nativeKeyCode != KeyCodes.KEY_DOWN)
                   && (nativeKeyCode != KeyCodes.KEY_UP) && (nativeKeyCode != KeyCodes.KEY_LEFT)
                   && (nativeKeyCode != KeyCodes.KEY_RIGHT) && (nativeKeyCode != KeyCodes.KEY_BACKSPACE)
                   && (nativeKeyCode != KeyCodes.KEY_DELETE) && (nativeKeyCode != KeyCodes.KEY_PAGEDOWN)
                   && (nativeKeyCode != KeyCodes.KEY_PAGEUP) && (nativeKeyCode != KeyCodes.KEY_ENTER)
                   && (nativeKeyCode != KeyCodes.KEY_ESCAPE) && (nativeKeyCode != KeyCodes.KEY_ALT)
-                  && (nativeKeyCode != KeyCodes.KEY_CTRL) && (nativeKeyCode != KeyCodes.KEY_SHIFT)) {
+                  && (nativeKeyCode != KeyCodes.KEY_CTRL) && (nativeKeyCode != KeyCodes.KEY_SHIFT)
+                  && (nativeKeyCode != KeyCodes.KEY_TAB)) {
             if (getValue() != null) {
                setValue(getValue().toUpperCase());
-               setCursorPos(curPos);
+               setCursorPos(getCursorPos());
             }
          }
       }
