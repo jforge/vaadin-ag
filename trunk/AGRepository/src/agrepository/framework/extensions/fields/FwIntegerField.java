@@ -10,7 +10,7 @@ public class FwIntegerField extends FwNumericField {
 
    public FwIntegerField() {
       super();
-      setOnlyIntegers(true);
+      setOnlyIntegerValues(true);
       addValidator(new IntegerValidator(FwApplication.current().getTranslator().get("error.wrongIntegerFormat")));
    }
 }

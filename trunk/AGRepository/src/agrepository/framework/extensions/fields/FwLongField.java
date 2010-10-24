@@ -9,7 +9,7 @@ public class FwLongField extends FwNumericField {
 
    public FwLongField() {
       super();
-      setOnlyIntegers(true);
+      setOnlyIntegerValues(true);
       addValidator(new FwLongValidator(FwApplication.current().getTranslator().get("error.wrongLongFormat")));
    }
 }
