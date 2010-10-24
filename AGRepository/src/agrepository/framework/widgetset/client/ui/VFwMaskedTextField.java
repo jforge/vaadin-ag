@@ -16,7 +16,7 @@ import com.vaadin.terminal.gwt.client.ApplicationConnection;
 import com.vaadin.terminal.gwt.client.UIDL;
 import com.vaadin.terminal.gwt.client.ui.VTextField;
 
-public class VMaskedTextField extends VTextField {
+public class VFwMaskedTextField extends VTextField {
    private char placeholder = '_';
    private StringBuilder string;
    protected String mask;
@@ -108,7 +108,7 @@ public class VMaskedTextField extends VTextField {
       }
    };
 
-   public VMaskedTextField() {
+   public VFwMaskedTextField() {
       super();
       addKeyPressHandler(keyPressHandler);
       addKeyDownHandler(keyDownHandler);

@@ -11,7 +11,7 @@ import com.vaadin.terminal.gwt.client.Paintable;
 import com.vaadin.terminal.gwt.client.RenderSpace;
 import com.vaadin.terminal.gwt.client.UIDL;
 
-public class VSpaceWrapper extends SimplePanel implements Paintable, Container {
+public class VFwSpaceWrapper extends SimplePanel implements Paintable, Container {
    public static final String CLASSNAME = "v-spacewrapper";
    public static final String CLICK_EVENT_IDENTIFIER = "click";
    protected String paintableId;
@@ -26,7 +26,7 @@ public class VSpaceWrapper extends SimplePanel implements Paintable, Container {
    private String padBottom = "";
    private String padLeft = "";
 
-   public VSpaceWrapper() {
+   public VFwSpaceWrapper() {
       setStyleName(CLASSNAME);
    }
 
