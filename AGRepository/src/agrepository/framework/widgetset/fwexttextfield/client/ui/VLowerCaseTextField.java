@@ -5,7 +5,7 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.vaadin.terminal.gwt.client.ui.VTextField;
 
-public class VFwExtTextField extends VTextField {
+public class VLowerCaseTextField extends VTextField {
    private KeyUpHandler keyUpHandler = new KeyUpHandler() {
       @Override
       public void onKeyUp(KeyUpEvent event) {
@@ -18,14 +18,14 @@ public class VFwExtTextField extends VTextField {
                   && (nativeKeyCode != KeyCodes.KEY_RIGHT) && (nativeKeyCode != KeyCodes.KEY_BACKSPACE)
                   && (nativeKeyCode != KeyCodes.KEY_DELETE)) {
             if (getValue() != null) {
-               setValue(getValue().toUpperCase());
+               setValue(getValue().toLowerCase());
                setCursorPos(curPos);
             }
          }
       }
    };
 
-   public VFwExtTextField() {
+   public VLowerCaseTextField() {
       super();
       addKeyUpHandler(keyUpHandler);
    }
