@@ -12,15 +12,13 @@ import com.vaadin.ui.TextField;
 @ClientWidget(VFwNumericField.class)
 public class FwNumericField extends TextField {
    private static final long serialVersionUID = 6093861878864667151L;
-   private Boolean onlyIntegerValues;
-   private Boolean onlyPositiveValues;
+   private boolean onlyIntegerValues;
 
    @Override
    public void paintContent(PaintTarget target) throws PaintException {
       super.paintContent(target);
       target.addAttribute("separatorChar", String.valueOf(DecimalFormatSymbols.getInstance().getDecimalSeparator()));
       target.addAttribute("onlyIntegerValues", onlyIntegerValues);
-      target.addAttribute("onlyPositiveValues", onlyPositiveValues);
    }
 
    public boolean isOnlyIntegerValues() {
@@ -29,15 +27,6 @@ public class FwNumericField extends TextField {
 
    public void setOnlyIntegerValues(Boolean onlyIntegerValues) {
       this.onlyIntegerValues = onlyIntegerValues;
-      requestRepaint();
-   }
-
-   public boolean isOnlyPositiveValues() {
-      return onlyPositiveValues;
-   }
-
-   public void setOnlyPositiveValues(Boolean onlyPositiveValues) {
-      this.onlyPositiveValues = onlyPositiveValues;
       requestRepaint();
    }
 }
