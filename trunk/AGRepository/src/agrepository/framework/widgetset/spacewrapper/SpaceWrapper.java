@@ -5,11 +5,12 @@ import agrepository.framework.widgetset.spacewrapper.client.ui.VSpaceWrapper;
 import com.vaadin.terminal.PaintException;
 import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.AbstractComponent;
+import com.vaadin.ui.ClientWidget;
 
 /**
  * Server side component for the VSpaceWrapper widget.
  */
-@com.vaadin.ui.ClientWidget(VSpaceWrapper.class)
+@ClientWidget(VSpaceWrapper.class)
 public class SpaceWrapper extends AbstractComponent {
    private static final long serialVersionUID = 2982631323804915038L;
    private AbstractComponent wrappedComponent;
