@@ -9,12 +9,7 @@ public class FwFloatField extends FwNumericField {
 
    public FwFloatField() {
       super();
+      setOnlyIntegers(false);
       addValidator(new FwFloatValidator(FwApplication.current().getTranslator().get("error.wrongFloatFormat")));
-   }
-
-   @Override
-   public Float getValue() {
-      Float value = (Float) super.getValue();
-      return (value == null) ? null : value;
    }
 }
