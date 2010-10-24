@@ -1,11 +1,11 @@
-package agrepository.framework.widgetset.uppercasetextfield.client.ui;
+package agrepository.framework.widgetset.fwexttextfield.client.ui;
 
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.vaadin.terminal.gwt.client.ui.VTextField;
 
-public class VUpperCaseTextField extends VTextField {
+public class VFwExtTextField extends VTextField {
    private KeyUpHandler keyUpHandler = new KeyUpHandler() {
       @Override
       public void onKeyUp(KeyUpEvent event) {
@@ -25,7 +25,7 @@ public class VUpperCaseTextField extends VTextField {
       }
    };
 
-   public VUpperCaseTextField() {
+   public VFwExtTextField() {
       super();
       addKeyUpHandler(keyUpHandler);
    }

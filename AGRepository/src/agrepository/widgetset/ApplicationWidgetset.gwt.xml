@@ -3,6 +3,5 @@
 <module>
    <inherits name="com.vaadin.terminal.gwt.DefaultWidgetSet" />
    <inherits name="agrepository.framework.widgetset.spacewrapper.SpaceWrapperWidgetset" />
-
-    <inherits name="agrepository.framework.widgetset.uppercasetextfield.UpperCaseTextFieldWidgetset" />
+   <inherits name="agrepository.framework.widgetset.fwexttextfield.UpperCaseTextFieldWidgetset" />
 </module>
