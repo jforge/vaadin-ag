@@ -13,7 +13,8 @@ import com.vaadin.terminal.gwt.client.ui.VTextField;
 
 public class VFwNumericField extends VTextField {
    private char separatorChar;
-   private boolean onlyIntegers;
+   private Boolean onlyIntegerValues;
+   private Boolean onlyPositiveValues;
    private boolean specialKeyDown;
    private boolean hasSign;
    private boolean hasSeparator;
@@ -39,11 +40,11 @@ public class VFwNumericField extends VTextField {
       public void onKeyPress(KeyPressEvent event) {
          char charCode = event.getCharCode();
          if ((('0' <= charCode) && (charCode <= '9')) || (charCode == '+') || (charCode == '-')
-                  || (!onlyIntegers && (charCode == separatorChar))) {
+                  || (!onlyIntegerValues && (charCode == separatorChar))) {
             if (hasSign && ((charCode == '+') || (charCode == '-'))) {
                event.preventDefault();
             }
-            if (hasSeparator && (!onlyIntegers && (charCode == separatorChar))) {
+            if (hasSeparator && (!onlyIntegerValues && (charCode == separatorChar))) {
                event.preventDefault();
             }
          } else if (!specialKeyDown) {
@@ -56,7 +57,7 @@ public class VFwNumericField extends VTextField {
       public void onKeyUp(KeyUpEvent event) {
          if (getValue() != null) {
             hasSign = getValue().length() > 0;
-            hasSeparator = !onlyIntegers && getValue().contains(Character.toString(separatorChar));
+            hasSeparator = !onlyIntegerValues && getValue().contains(Character.toString(separatorChar));
          } else {
             hasSign = false;
             hasSeparator = false;
@@ -67,10 +68,17 @@ public class VFwNumericField extends VTextField {
    @Override
    public void updateFromUIDL(UIDL uidl, ApplicationConnection client) {
       super.updateFromUIDL(uidl, client);
-      if (uidl.getStringAttribute("separatorChar") != null) {
-         separatorChar = uidl.getStringAttribute("separatorChar").toCharArray()[0];
+      if (uidl.hasAttribute("separatorChar")) {
+         if (uidl.getStringAttribute("separatorChar") != null) {
+            separatorChar = uidl.getStringAttribute("separatorChar").toCharArray()[0];
+         }
       }
-      onlyIntegers = uidl.getBooleanAttribute("onlyIntegers");
+      if (uidl.hasAttribute("onlyIntegerValues")) {
+         onlyIntegerValues = uidl.getBooleanAttribute("onlyIntegerValues");
+      }
+      if (uidl.hasAttribute("onlyPositiveValues")) {
+         onlyPositiveValues = uidl.getBooleanAttribute("onlyPositiveValues");
+      }
    }
 
    public VFwNumericField() {

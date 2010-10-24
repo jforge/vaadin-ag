@@ -10,7 +10,7 @@ public class FwDoubleField extends FwNumericField {
 
    public FwDoubleField() {
       super();
-      setOnlyIntegers(false);
+      setOnlyIntegerValues(false);
       addValidator(new DoubleValidator(FwApplication.current().getTranslator().get("error.wrongDoubleFormat")));
    }
 }
