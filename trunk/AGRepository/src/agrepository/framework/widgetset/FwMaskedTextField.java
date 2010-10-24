@@ -1,6 +1,6 @@
 package agrepository.framework.widgetset;
 
-import agrepository.framework.widgetset.client.ui.VMaskedTextField;
+import agrepository.framework.widgetset.client.ui.VFwMaskedTextField;
 
 import com.vaadin.data.Property;
 import com.vaadin.terminal.PaintException;
@@ -8,7 +8,7 @@ import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.ClientWidget;
 import com.vaadin.ui.TextField;
 
-@ClientWidget(VMaskedTextField.class)
+@ClientWidget(VFwMaskedTextField.class)
 public class FwMaskedTextField extends TextField {
    private static final long serialVersionUID = 3351884161296775154L;
    private String mask;
