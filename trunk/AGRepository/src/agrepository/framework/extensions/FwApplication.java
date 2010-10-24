@@ -19,9 +19,9 @@ import com.vaadin.Application;
 import com.vaadin.terminal.Terminal;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
 
-public abstract class FwExtApplication extends Application {
+public abstract class FwApplication extends Application {
    @SuppressWarnings("unused")
-   private static final Log LOG = LogFactory.getLog(FwExtApplication.class);
+   private static final Log LOG = LogFactory.getLog(FwApplication.class);
    private static final long serialVersionUID = 5473629791987132392L;
    private FwThreadLocalPattern threadLocal;
    private FwParameters parameters;
@@ -38,7 +38,7 @@ public abstract class FwExtApplication extends Application {
       setTheme(parameters.getString("application.theme"));
       setLocale(new Locale(parameters.getString("application.locale")));
       translator = new FwTranslator();
-      FwExtWindow window = new FwExtWindow();
+      FwWindow window = new FwWindow();
       window.setCaption(translator.get("application.title"));
       setMainWindow(window);
       userMessages = new FwUserMessages();
@@ -98,7 +98,7 @@ public abstract class FwExtApplication extends Application {
       }
    }
 
-   public static FwExtApplication current() {
+   public static FwApplication current() {
       return FwThreadLocalPattern.current();
    }
 

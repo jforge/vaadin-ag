@@ -1,18 +1,16 @@
 package agrepository.framework.extensions.fields;
 
-import agrepository.framework.extensions.FwExtApplication;
+import agrepository.framework.extensions.FwApplication;
+import agrepository.framework.widgetset.FwNumericField;
 
 import com.vaadin.data.validator.DoubleValidator;
 
-public class FwDoubleField extends FwExtTextField {
+public class FwDoubleField extends FwNumericField {
    private static final long serialVersionUID = -1362941912435929080L;
 
    public FwDoubleField() {
       super();
-      /*
-       * [+-]?[0-9]+(\.$[0-9]+)?([eE][+-]?[0-9]+)?
-       */
-      addValidator(new DoubleValidator(FwExtApplication.current().getTranslator().get("error.wrongDoubleFormat")));
+      addValidator(new DoubleValidator(FwApplication.current().getTranslator().get("error.wrongDoubleFormat")));
    }
 
    @Override

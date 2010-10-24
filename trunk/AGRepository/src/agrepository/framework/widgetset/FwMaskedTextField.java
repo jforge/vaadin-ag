@@ -9,27 +9,27 @@ import com.vaadin.ui.ClientWidget;
 import com.vaadin.ui.TextField;
 
 @ClientWidget(VMaskedTextField.class)
-public class MaskedTextField extends TextField {
+public class FwMaskedTextField extends TextField {
    private static final long serialVersionUID = 3351884161296775154L;
    private String mask;
 
-   public MaskedTextField() {
+   public FwMaskedTextField() {
    }
 
-   public MaskedTextField(String string) {
+   public FwMaskedTextField(String string) {
       setCaption(string);
    }
 
-   public MaskedTextField(String string, String mask) {
+   public FwMaskedTextField(String string, String mask) {
       setCaption(string);
       setMask(mask);
    }
 
-   public MaskedTextField(Property dataSource) {
+   public FwMaskedTextField(Property dataSource) {
       super(dataSource);
    }
 
-   public MaskedTextField(String caption, Property dataSource) {
+   public FwMaskedTextField(String caption, Property dataSource) {
       super(caption, dataSource);
    }
 

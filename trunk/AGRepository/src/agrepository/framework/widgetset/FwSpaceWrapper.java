@@ -11,11 +11,11 @@ import com.vaadin.ui.ClientWidget;
  * Server side component for the VSpaceWrapper widget.
  */
 @ClientWidget(VSpaceWrapper.class)
-public class SpaceWrapper extends AbstractComponent {
+public class FwSpaceWrapper extends AbstractComponent {
    private static final long serialVersionUID = 2982631323804915038L;
    private AbstractComponent wrappedComponent;
 
-   public SpaceWrapper(AbstractComponent cmp) {
+   public FwSpaceWrapper(AbstractComponent cmp) {
       wrappedComponent = cmp;
    }
 

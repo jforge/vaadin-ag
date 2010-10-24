@@ -30,10 +30,10 @@ public abstract class FwListener implements Button.ClickListener, Property.Value
    private static final long serialVersionUID = -5630629147168390726L;
    private ByteArrayOutputStream uploadData;
    private boolean lock;
-   private FwExtApplication application;
+   private FwApplication application;
 
    public FwListener() {
-      application = FwExtApplication.current();
+      application = FwApplication.current();
    }
 
    @Override
@@ -71,7 +71,7 @@ public abstract class FwListener implements Button.ClickListener, Property.Value
    }
 
    public void unhandledError(String message, Throwable t) {
-      FwExtApplication application = FwExtApplication.current();
+      FwApplication application = FwApplication.current();
       if ((application != null) && (application.getUserMessages() != null)) {
          application.getUserMessages().error(message, t);
       } else {

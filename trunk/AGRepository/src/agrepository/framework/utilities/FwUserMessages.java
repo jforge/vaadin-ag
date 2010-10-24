@@ -8,7 +8,7 @@ import java.io.Serializable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import agrepository.framework.extensions.FwExtApplication;
+import agrepository.framework.extensions.FwApplication;
 
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.Notification;
@@ -18,10 +18,10 @@ public class FwUserMessages implements Serializable {
    private static final Log LOG = LogFactory.getLog(FwUserMessages.class);
    private static final long serialVersionUID = -2353972624960242281L;
    private Window window;
-   private FwExtApplication application;
+   private FwApplication application;
 
    public FwUserMessages() {
-      application = FwExtApplication.current();
+      application = FwApplication.current();
       window = application.getMainWindow();
       if (window == null) {
          throw new IllegalStateException(application.getTranslator().get("error.missingWindow"));

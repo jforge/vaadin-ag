@@ -9,7 +9,7 @@ import org.apache.commons.configuration.SystemConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import agrepository.framework.extensions.FwExtApplication;
+import agrepository.framework.extensions.FwApplication;
 
 public class FwParameters extends CompositeConfiguration {
    private static final Log LOG = LogFactory.getLog(FwParameters.class);
@@ -17,7 +17,7 @@ public class FwParameters extends CompositeConfiguration {
    private String parametersFile;
 
    public FwParameters() {
-      parametersFile = FwExtApplication.current().getServletContext().getInitParameter("parametersFile");
+      parametersFile = FwApplication.current().getServletContext().getInitParameter("parametersFile");
       refresh();
    }
 
@@ -25,7 +25,7 @@ public class FwParameters extends CompositeConfiguration {
       clear();
       addConfiguration(new SystemConfiguration());
       try {
-         addConfiguration(new PropertiesConfiguration(new File(FwExtApplication.current().getBaseDirectory(), parametersFile)));
+         addConfiguration(new PropertiesConfiguration(new File(FwApplication.current().getBaseDirectory(), parametersFile)));
       } catch (ConfigurationException exception) {
          LOG.error(null, exception);
       }
