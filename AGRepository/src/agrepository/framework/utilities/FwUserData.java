@@ -14,6 +14,8 @@ public class FwUserData implements Serializable {
    private String username;
    private String name;
    private String email;
+   private boolean autoLogin;
+   private boolean autoLogout;
    private OracleConnection connection;
 
    public String getUsername() {
@@ -41,6 +43,24 @@ public class FwUserData implements Serializable {
    }
 
    public OracleConnection getConnection() {
+      if (connection == null) {
+      }
       return connection;
+   }
+
+   public boolean isAutoLogin() {
+      return autoLogin;
+   }
+
+   public void setAutoLogin(boolean autoLogin) {
+      this.autoLogin = autoLogin;
+   }
+
+   public boolean isAutoLogout() {
+      return autoLogout;
+   }
+
+   public void setAutoLogout(boolean autoLogout) {
+      this.autoLogout = autoLogout;
    }
 }
