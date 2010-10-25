@@ -2,6 +2,8 @@ package agrepository.framework.utilities;
 
 import java.io.Serializable;
 
+import oracle.jdbc.OracleConnection;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -12,6 +14,7 @@ public class FwUserData implements Serializable {
    private String username;
    private String name;
    private String email;
+   private OracleConnection connection;
 
    public String getUsername() {
       return username;
@@ -35,5 +38,9 @@ public class FwUserData implements Serializable {
 
    public void setEmail(String email) {
       this.email = email;
+   }
+
+   public OracleConnection getConnection() {
+      return connection;
    }
 }

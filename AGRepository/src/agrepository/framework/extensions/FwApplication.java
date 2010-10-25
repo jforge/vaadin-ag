@@ -1,10 +1,13 @@
 package agrepository.framework.extensions;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.Locale;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+
+import oracle.jdbc.OracleConnection;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,6 +16,7 @@ import agrepository.framework.utilities.FwParameters;
 import agrepository.framework.utilities.FwThreadLocalPattern;
 import agrepository.framework.utilities.FwTranslator;
 import agrepository.framework.utilities.FwUIBuilder;
+import agrepository.framework.utilities.FwUserData;
 import agrepository.framework.utilities.FwUserMessages;
 
 import com.vaadin.Application;
@@ -22,7 +26,6 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
 
 public abstract class FwApplication extends Application {
-   @SuppressWarnings("unused")
    private static final Log LOG = LogFactory.getLog(FwApplication.class);
    private static final long serialVersionUID = 5473629791987132392L;
    private FwThreadLocalPattern threadLocal;
@@ -90,6 +93,41 @@ public abstract class FwApplication extends Application {
 
    public FwUserMessages getUserMessages() {
       return userMessages;
+   }
+
+   public OracleConnection getConnection() {
+      if (getUser() != null) {
+         return ((FwUserData) getUser()).getConnection();
+      }
+      return null;
+   }
+
+   public FwUserData getUserData() {
+      return (FwUserData) getUser();
+   }
+
+   public void login(FwUserData userData) {
+      setUser(userData);
+   }
+
+   public void logout() {
+      if (isLogged()) {
+         OracleConnection connection = getUserData().getConnection();
+         if (connection != null) {
+            try {
+               connection.rollback();
+               connection.close();
+            } catch (SQLException exception) {
+               LOG.error(null, exception);
+            }
+         }
+         setUser(null);
+      }
+      close();
+   }
+
+   public boolean isLogged() {
+      return getUser() != null;
    }
 
    @Override
