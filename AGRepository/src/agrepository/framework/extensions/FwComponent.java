@@ -5,6 +5,8 @@ import org.apache.commons.logging.LogFactory;
 
 import agrepository.framework.utilities.FwUIBuilder;
 
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.VerticalLayout;
 
@@ -29,4 +31,19 @@ public abstract class FwComponent extends CustomComponent {
    }
 
    public abstract void createUI();
+
+   /*
+    * BUTTONS
+    */
+   public Button button() {
+      return uiBuilder.button();
+   }
+
+   public Button button(String caption) {
+      return uiBuilder.button(caption);
+   }
+
+   public Button button(String caption, ClickListener listener) {
+      return uiBuilder.button(caption, listener);
+   }
 }

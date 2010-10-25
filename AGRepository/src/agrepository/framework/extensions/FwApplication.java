@@ -18,6 +18,8 @@ import agrepository.framework.utilities.FwUserMessages;
 import com.vaadin.Application;
 import com.vaadin.terminal.Terminal;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickListener;
 
 public abstract class FwApplication extends Application {
    @SuppressWarnings("unused")
@@ -42,6 +44,7 @@ public abstract class FwApplication extends Application {
       window.setCaption(translator.get("application.title"));
       setMainWindow(window);
       userMessages = new FwUserMessages();
+      uiBuilder = new FwUIBuilder(window);
       createUI();
    }
 
@@ -126,4 +129,19 @@ public abstract class FwApplication extends Application {
    }
 
    public abstract void createUI();
+
+   /*
+    * BUTTONS
+    */
+   public Button button() {
+      return uiBuilder.button();
+   }
+
+   public Button button(String caption) {
+      return uiBuilder.button(caption);
+   }
+
+   public Button button(String caption, ClickListener listener) {
+      return uiBuilder.button(caption, listener);
+   }
 }
