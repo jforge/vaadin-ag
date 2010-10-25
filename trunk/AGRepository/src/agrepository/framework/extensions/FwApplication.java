@@ -5,6 +5,9 @@ import java.sql.SQLException;
 import java.util.Locale;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import oracle.jdbc.OracleConnection;
@@ -21,11 +24,12 @@ import agrepository.framework.utilities.FwUserMessages;
 
 import com.vaadin.Application;
 import com.vaadin.terminal.Terminal;
+import com.vaadin.terminal.gwt.server.HttpServletRequestListener;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
 
-public abstract class FwApplication extends Application {
+public abstract class FwApplication extends Application implements HttpServletRequestListener {
    private static final Log LOG = LogFactory.getLog(FwApplication.class);
    private static final long serialVersionUID = 5473629791987132392L;
    private FwThreadLocalPattern threadLocal;
@@ -34,6 +38,10 @@ public abstract class FwApplication extends Application {
    private FwUIBuilder uiBuilder;
    private FwUserMessages userMessages;
    private File temporaryDirectory;
+   private HttpServletRequest request;
+   private HttpServletResponse response;
+   private String usernameAutologin;
+   private String passwordAutologin;
 
    @Override
    public void init() {
@@ -48,7 +56,20 @@ public abstract class FwApplication extends Application {
       setMainWindow(window);
       userMessages = new FwUserMessages();
       uiBuilder = new FwUIBuilder(window);
+      showLoginDialog();
       createUI();
+   }
+
+   @Override
+   public void onRequestStart(HttpServletRequest request, HttpServletResponse response) {
+      this.request = request;
+      this.response = response;
+   }
+
+   @Override
+   public void onRequestEnd(HttpServletRequest request, HttpServletResponse response) {
+      this.request = null;
+      this.response = null;
    }
 
    public WebApplicationContext getWebApplicationContext() {
@@ -96,42 +117,30 @@ public abstract class FwApplication extends Application {
    }
 
    public OracleConnection getConnection() {
-      if (getUser() != null) {
-         return ((FwUserData) getUser()).getConnection();
+      OracleConnection connection = null;
+      if (getUserData() != null) {
+         connection = getUserData().getConnection();
       }
-      return null;
+      return connection;
    }
 
    public FwUserData getUserData() {
       return (FwUserData) getUser();
    }
 
-   public void login(FwUserData userData) {
-      setUser(userData);
-   }
-
-   public void logout() {
-      if (isLogged()) {
+   @Override
+   public void close() {
+      if (getUserData() != null) {
          OracleConnection connection = getUserData().getConnection();
          if (connection != null) {
             try {
                connection.rollback();
                connection.close();
             } catch (SQLException exception) {
-               LOG.error(null, exception);
+               LOG.error(exception);
             }
          }
-         setUser(null);
       }
-      close();
-   }
-
-   public boolean isLogged() {
-      return getUser() != null;
-   }
-
-   @Override
-   public void close() {
       super.close();
       if (threadLocal != null) {
          threadLocal.transactionEnd(this, null);
@@ -164,6 +173,38 @@ public abstract class FwApplication extends Application {
    public void refresh() {
       parameters.refresh();
       translator.refresh();
+   }
+
+   public HttpServletRequest getHttpServletRequest() {
+      return request;
+   }
+
+   public void setHttpServletRequest(HttpServletRequest request) {
+      this.request = request;
+   }
+
+   public HttpServletResponse getHttpServletResponse() {
+      return response;
+   }
+
+   public void setHttpServletResponse(HttpServletResponse response) {
+      this.response = response;
+   }
+
+   public void showLoginDialog() {
+      Cookie[] cookies = request.getCookies();
+      if (cookies != null) {
+         for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(parameters.getString("cookie.usernameKey"))) {
+               usernameAutologin = cookie.getValue();
+            } else if (cookie.getName().equals(parameters.getString("cookie.passwordKey"))) {
+               passwordAutologin = cookie.getValue();
+            }
+         }
+      }
+   }
+
+   public void showLogoutDialog() {
    }
 
    public abstract void createUI();
