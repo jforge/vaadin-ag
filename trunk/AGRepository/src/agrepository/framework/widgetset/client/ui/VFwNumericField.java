@@ -13,9 +13,8 @@ import com.vaadin.terminal.gwt.client.ui.VTextField;
 
 public class VFwNumericField extends VTextField {
    private char separatorChar;
-   private Boolean onlyIntegerValues;
+   private boolean onlyIntegerValues;
    private boolean specialKeyDown;
-   private boolean hasSign;
    private boolean hasSeparator;
    private boolean hasPositiveSign;
    private boolean hasNegativeSign;
@@ -64,7 +63,8 @@ public class VFwNumericField extends VTextField {
             hasNegativeSign = "-".equals(sign);
             hasSeparator = !onlyIntegerValues && getValue().contains(Character.toString(separatorChar));
          } else {
-            hasSign = false;
+            hasPositiveSign = false;
+            hasNegativeSign = false;
             hasSeparator = false;
          }
       }

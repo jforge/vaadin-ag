@@ -13,6 +13,8 @@ import com.vaadin.ui.TextField;
 public class FwNumericField extends TextField {
    private static final long serialVersionUID = 6093861878864667151L;
    private boolean onlyIntegerValues;
+   private Object minValue;
+   private Object maxValue;
 
    @Override
    public void paintContent(PaintTarget target) throws PaintException {
@@ -28,5 +30,21 @@ public class FwNumericField extends TextField {
    public void setOnlyIntegerValues(Boolean onlyIntegerValues) {
       this.onlyIntegerValues = onlyIntegerValues;
       requestRepaint();
+   }
+
+   public Object getMinValue() {
+      return minValue;
+   }
+
+   public void setMinValue(Object minValue) {
+      this.minValue = minValue;
+   }
+
+   public Object getMaxValue() {
+      return maxValue;
+   }
+
+   public void setMaxValue(Object maxValue) {
+      this.maxValue = maxValue;
    }
 }
