@@ -1,7 +1,5 @@
 package agrepository.framework.extensions.fields;
 
-import agrepository.framework.extensions.FwApplication;
-import agrepository.framework.extensions.validators.FwFloatValidator;
 import agrepository.framework.widgetset.FwNumericField;
 
 public class FwFloatField extends FwNumericField {
@@ -10,6 +8,5 @@ public class FwFloatField extends FwNumericField {
    public FwFloatField() {
       super();
       setOnlyIntegerValues(false);
-      addValidator(new FwFloatValidator(FwApplication.current().getTranslator().get("error.wrongFloatFormat")));
    }
 }

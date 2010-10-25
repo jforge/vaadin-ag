@@ -1,7 +1,5 @@
 package agrepository.framework.extensions.fields;
 
-import agrepository.framework.extensions.FwApplication;
-import agrepository.framework.extensions.validators.FwLongValidator;
 import agrepository.framework.widgetset.FwNumericField;
 
 public class FwLongField extends FwNumericField {
@@ -10,6 +8,5 @@ public class FwLongField extends FwNumericField {
    public FwLongField() {
       super();
       setOnlyIntegerValues(true);
-      addValidator(new FwLongValidator(FwApplication.current().getTranslator().get("error.wrongLongFormat")));
    }
 }

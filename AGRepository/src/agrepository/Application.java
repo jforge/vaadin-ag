@@ -6,7 +6,8 @@ import org.apache.commons.logging.LogFactory;
 import agrepository.framework.extensions.FwApplication;
 import agrepository.framework.extensions.fields.FwFloatField;
 import agrepository.framework.extensions.fields.FwIntegerField;
-import agrepository.framework.widgetset.FwUpperTextField;
+import agrepository.framework.extensions.fields.FwLowerTextField;
+import agrepository.framework.extensions.fields.FwUpperTextField;
 
 public class Application extends FwApplication {
    @SuppressWarnings("unused")
@@ -18,6 +19,9 @@ public class Application extends FwApplication {
       FwUpperTextField uFld = new FwUpperTextField();
       uFld.setColumns(25);
       getMainWindow().addComponent(uFld);
+      FwLowerTextField lFld = new FwLowerTextField();
+      lFld.setColumns(25);
+      getMainWindow().addComponent(lFld);
       FwIntegerField iFld = new FwIntegerField();
       iFld.setColumns(50);
       getMainWindow().addComponent(iFld);
