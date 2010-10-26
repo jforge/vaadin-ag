@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import oracle.jdbc.OracleConnection;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -21,6 +22,7 @@ import agrepository.framework.utilities.FwTranslator;
 import agrepository.framework.utilities.FwUIBuilder;
 import agrepository.framework.utilities.FwUserData;
 import agrepository.framework.utilities.FwUserMessages;
+import agrepository.framework.utilities.FwUtils;
 
 import com.vaadin.Application;
 import com.vaadin.terminal.Terminal;
@@ -192,6 +194,8 @@ public abstract class FwApplication extends Application implements HttpServletRe
    }
 
    public void showLoginDialog() {
+      LOG.debug(RandomStringUtils.randomAlphabetic(15));
+      LOG.debug(RandomStringUtils.randomAlphabetic(15));
       Cookie[] cookies = request.getCookies();
       if (cookies != null) {
          for (Cookie cookie : cookies) {
@@ -201,6 +205,9 @@ public abstract class FwApplication extends Application implements HttpServletRe
                passwordAutologin = cookie.getValue();
             }
          }
+      }
+      if (!FwUtils.isEmpty(usernameAutologin) && !FwUtils.isEmpty(passwordAutologin)) {
+         // TODO: kontrola korisnika u bazi
       }
    }
 
