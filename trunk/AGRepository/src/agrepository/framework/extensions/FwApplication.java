@@ -5,31 +5,27 @@ import java.sql.SQLException;
 import java.util.Locale;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import oracle.jdbc.OracleConnection;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import agrepository.framework.dialogs.FwLoginDialog;
 import agrepository.framework.utilities.FwParameters;
 import agrepository.framework.utilities.FwThreadLocalPattern;
 import agrepository.framework.utilities.FwTranslator;
 import agrepository.framework.utilities.FwUIBuilder;
 import agrepository.framework.utilities.FwUserData;
 import agrepository.framework.utilities.FwUserMessages;
-import agrepository.framework.utilities.FwUtils;
 
 import com.vaadin.Application;
 import com.vaadin.terminal.Terminal;
 import com.vaadin.terminal.gwt.server.HttpServletRequestListener;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickListener;
 
 public abstract class FwApplication extends Application implements HttpServletRequestListener {
    private static final Log LOG = LogFactory.getLog(FwApplication.class);
@@ -42,8 +38,7 @@ public abstract class FwApplication extends Application implements HttpServletRe
    private File temporaryDirectory;
    private HttpServletRequest request;
    private HttpServletResponse response;
-   private String usernameAutologin;
-   private String passwordAutologin;
+   private FwLoginDialog loginDialog;
 
    @Override
    public void init() {
@@ -58,8 +53,8 @@ public abstract class FwApplication extends Application implements HttpServletRe
       setMainWindow(window);
       userMessages = new FwUserMessages();
       uiBuilder = new FwUIBuilder(window);
-      showLoginDialog();
-      createUI();
+      FwLoginDialog loginDialog = new FwLoginDialog();
+      loginDialog.show();
    }
 
    @Override
@@ -95,6 +90,10 @@ public abstract class FwApplication extends Application implements HttpServletRe
          temporaryDirectory = new File(getBaseDirectory(), parameters.getString("temporaryDirectory"));
       }
       return temporaryDirectory;
+   }
+
+   public String getFullName() {
+      return String.format("%s - %s", translator.get("application.title"), getVersion());
    }
 
    @Override
@@ -157,7 +156,7 @@ public abstract class FwApplication extends Application implements HttpServletRe
    @Override
    public Terminal.ErrorListener getErrorHandler() {
       return new Terminal.ErrorListener() {
-         private static final long serialVersionUID = 1L;
+         private static final long serialVersionUID = 630316500038211380L;
 
          @Override
          public void terminalError(Terminal.ErrorEvent event) {
@@ -193,41 +192,5 @@ public abstract class FwApplication extends Application implements HttpServletRe
       this.response = response;
    }
 
-   public void showLoginDialog() {
-      LOG.debug(RandomStringUtils.randomAlphabetic(15));
-      LOG.debug(RandomStringUtils.randomAlphabetic(15));
-      Cookie[] cookies = request.getCookies();
-      if (cookies != null) {
-         for (Cookie cookie : cookies) {
-            if (cookie.getName().equals(parameters.getString("cookie.usernameKey"))) {
-               usernameAutologin = cookie.getValue();
-            } else if (cookie.getName().equals(parameters.getString("cookie.passwordKey"))) {
-               passwordAutologin = cookie.getValue();
-            }
-         }
-      }
-      if (!FwUtils.isEmpty(usernameAutologin) && !FwUtils.isEmpty(passwordAutologin)) {
-         // TODO: kontrola korisnika u bazi
-      }
-   }
-
-   public void showLogoutDialog() {
-   }
-
    public abstract void createUI();
-
-   /*
-    * BUTTONS
-    */
-   public Button button() {
-      return uiBuilder.button();
-   }
-
-   public Button button(String caption) {
-      return uiBuilder.button(caption);
-   }
-
-   public Button button(String caption, ClickListener listener) {
-      return uiBuilder.button(caption, listener);
-   }
 }

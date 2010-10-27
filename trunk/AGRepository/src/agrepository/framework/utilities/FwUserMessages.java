@@ -19,12 +19,16 @@ public class FwUserMessages implements Serializable {
    private static final long serialVersionUID = -2353972624960242281L;
    private Window window;
    private FwApplication application;
+   private FwTranslator translator;
+   private FwParameters parameters;
 
    public FwUserMessages() {
       application = FwApplication.current();
+      translator = application.getTranslator();
+      parameters = application.getParameters();
       window = application.getMainWindow();
       if (window == null) {
-         throw new IllegalStateException(application.getTranslator().get("error.missingWindow"));
+         throw new IllegalStateException(translator.get("error.missingWindow"));
       }
    }
 
@@ -62,7 +66,7 @@ public class FwUserMessages implements Serializable {
    }
 
    public void error(Throwable throwable) {
-      error(application.getTranslator().get("error.unhandledException"), null, throwable);
+      error(translator.get("error.unhandledException"), null, throwable);
    }
 
    public void warning(String message) {
@@ -117,12 +121,12 @@ public class FwUserMessages implements Serializable {
          }
          int position = description.indexOf("<br");
          int lineCount = 1;
-         while ((lineCount < application.getParameters().getInt("default.descriptionLines")) && (position > 0)
+         while ((lineCount < parameters.getInt("default.descriptionLines")) && (position > 0)
                   && (position < description.length())) {
             position = description.indexOf("<br", position + 3);
             lineCount++;
          }
-         if ((position > 0) && (lineCount >= application.getParameters().getInt("default.descriptionLines"))) {
+         if ((position > 0) && (lineCount >= parameters.getInt("default.descriptionLines"))) {
             description = description.substring(0, position) + "<br/>(...)";
          }
       }
