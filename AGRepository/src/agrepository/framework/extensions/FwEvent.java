@@ -39,40 +39,53 @@ public class FwEvent implements Serializable {
    private CloseEvent closeEvent;
    private int[] modifiers;
    private int key;
+   private FwApplication application;
+
+   public FwEvent() {
+      application = FwApplication.current();
+   }
 
    public FwEvent(Upload.FinishedEvent event, byte[] data) {
+      super();
       finishedEvent = event;
       this.data = data;
    }
 
    public FwEvent(Button.ClickEvent event) {
+      super();
       clickEvent = event;
    }
 
    public FwEvent(Property.ValueChangeEvent event) {
+      super();
       valueChangeEvent = event;
    }
 
    public FwEvent(Map<String, String[]> parameters) {
+      super();
       this.parameters = parameters;
    }
 
    public FwEvent(URL contextURL, String relativeURI) {
+      super();
       this.contextURL = contextURL;
       this.relativeURI = relativeURI;
    }
 
    public FwEvent(Table table, Object itemId, Object columnId) {
+      super();
       this.table = table;
       this.itemId = itemId;
       this.columnId = columnId;
    }
 
    public FwEvent(CloseEvent event) {
+      super();
       closeEvent = event;
    }
 
    public FwEvent(int key, int[] modifiers) {
+      super();
       this.key = key;
       this.modifiers = modifiers;
    }

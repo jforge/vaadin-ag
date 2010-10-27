@@ -5,8 +5,6 @@ import org.apache.commons.logging.LogFactory;
 
 import agrepository.framework.utilities.FwUIBuilder;
 
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.VerticalLayout;
 
@@ -14,8 +12,8 @@ public abstract class FwComponent extends CustomComponent {
    @SuppressWarnings("unused")
    private static final Log LOG = LogFactory.getLog(FwComponent.class);
    private static final long serialVersionUID = -4988692704729896908L;
-   protected VerticalLayout rootLayout;
-   protected FwUIBuilder uiBuilder;
+   private VerticalLayout rootLayout;
+   private FwUIBuilder uiBuilder;
 
    public FwComponent() {
       this(true);
@@ -32,18 +30,11 @@ public abstract class FwComponent extends CustomComponent {
 
    public abstract void createUI();
 
-   /*
-    * BUTTONS
-    */
-   public Button button() {
-      return uiBuilder.button();
+   public FwUIBuilder getUiBuilder() {
+      return uiBuilder;
    }
 
-   public Button button(String caption) {
-      return uiBuilder.button(caption);
-   }
-
-   public Button button(String caption, ClickListener listener) {
-      return uiBuilder.button(caption, listener);
+   public VerticalLayout getRootLayout() {
+      return rootLayout;
    }
 }

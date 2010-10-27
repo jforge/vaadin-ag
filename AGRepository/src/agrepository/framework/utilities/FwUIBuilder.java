@@ -5,8 +5,6 @@ import java.io.Serializable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import agrepository.framework.extensions.FwApplication;
-
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
@@ -20,10 +18,6 @@ public class FwUIBuilder implements Serializable {
 
    public FwUIBuilder(ComponentContainer container) {
       this.container = container;
-   }
-
-   public FwApplication getApplication() {
-      return FwApplication.current();
    }
 
    public void add(Component component) {
