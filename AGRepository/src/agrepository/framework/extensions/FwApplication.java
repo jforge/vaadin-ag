@@ -38,7 +38,6 @@ public abstract class FwApplication extends Application implements HttpServletRe
    private File temporaryDirectory;
    private HttpServletRequest request;
    private HttpServletResponse response;
-   private FwLoginDialog loginDialog;
 
    @Override
    public void init() {
