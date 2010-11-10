@@ -60,7 +60,7 @@ public class FwLoginDialog extends FwWindow {
          private static final long serialVersionUID = 1159486070944237738L;
 
          @Override
-         public void exec(FwEvent event) throws Exception {
+         public void execute(FwEvent event) throws Exception {
             try {
                checkUser(username.getValue().toString(), password.getValue().toString());
                hide();
