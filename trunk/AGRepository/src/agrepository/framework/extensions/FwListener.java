@@ -41,19 +41,19 @@ public abstract class FwListener implements Button.ClickListener, Serializable {
    @Override
    public void buttonClick(ClickEvent event) {
       try {
-         execOnce(new FwEvent(event));
+         executeOnce(new FwEvent(event));
       } catch (Throwable throwable) {
          unhandledError(throwable);
       }
    }
 
-   protected synchronized void execOnce(FwEvent event) throws Exception {
+   protected synchronized void executeOnce(FwEvent event) throws Exception {
       if (lock) {
          return;
       }
       lock = true;
       try {
-         exec(event);
+         execute(event);
       } catch (Exception exception) {
          throw exception;
       } finally {
@@ -61,5 +61,5 @@ public abstract class FwListener implements Button.ClickListener, Serializable {
       }
    }
 
-   public abstract void exec(FwEvent event) throws Exception;
+   public abstract void execute(FwEvent event) throws Exception;
 }

@@ -166,7 +166,7 @@ public class FwEvent implements Serializable {
 
    public String getStringValue() {
       Object value = getValue();
-      return value == null ? null : value.toString();
+      return (value == null) ? null : value.toString();
    }
 
    public byte[] getData() {
@@ -194,7 +194,7 @@ public class FwEvent implements Serializable {
    }
 
    public Window getWindow() {
-      return closeEvent != null ? closeEvent.getWindow() : null;
+      return (closeEvent != null) ? closeEvent.getWindow() : null;
    }
 
    public Object getItemId() {
@@ -206,7 +206,7 @@ public class FwEvent implements Serializable {
    }
 
    public Button getButton() {
-      return clickEvent != null ? clickEvent.getButton() : null;
+      return (clickEvent != null) ? clickEvent.getButton() : null;
    }
 
    public int getKey() {

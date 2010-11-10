@@ -21,7 +21,7 @@ public class Application extends FwApplication {
          private static final long serialVersionUID = -574714189942945415L;
 
          @Override
-         public void exec(FwEvent event) throws Exception {
+         public void execute(FwEvent event) throws Exception {
             close();
          }
       });
