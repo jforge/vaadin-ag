@@ -11,12 +11,13 @@ import agrepository.framework.utilities.FwTranslator;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 
+@SuppressWarnings("serial")
 public abstract class FwListener implements Button.ClickListener, Serializable {
    private static final Log LOG = LogFactory.getLog(FwListener.class);
-   private static final long serialVersionUID = 6444177796751288132L;
    private boolean lock;
    private FwApplication application;
    private FwTranslator translator;
+   @SuppressWarnings("unused")
    private FwParameters parameters;
 
    public FwListener() {

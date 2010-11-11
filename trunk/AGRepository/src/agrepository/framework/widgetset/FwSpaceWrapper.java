@@ -10,9 +10,9 @@ import com.vaadin.ui.ClientWidget;
 /**
  * Server side component for the VSpaceWrapper widget.
  */
+@SuppressWarnings("serial")
 @ClientWidget(VFwSpaceWrapper.class)
 public class FwSpaceWrapper extends AbstractComponent {
-   private static final long serialVersionUID = 2982631323804915038L;
    private AbstractComponent wrappedComponent;
 
    public FwSpaceWrapper(AbstractComponent cmp) {

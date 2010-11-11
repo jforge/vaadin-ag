@@ -10,10 +10,10 @@ import agrepository.framework.extensions.FwApplication;
 import com.vaadin.Application;
 import com.vaadin.service.ApplicationContext;
 
+@SuppressWarnings("serial")
 public class FwThreadLocalPattern implements ApplicationContext.TransactionListener, Serializable {
    @SuppressWarnings("unused")
    private static final Log LOG = LogFactory.getLog(FwThreadLocalPattern.class);
-   private static final long serialVersionUID = -2613987107755677286L;
    private static ThreadLocal<FwApplication> current = new ThreadLocal<FwApplication>();
    private FwApplication application;
 

@@ -19,9 +19,9 @@ import com.vaadin.ui.Form;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
+@SuppressWarnings("serial")
 public class FwLoginDialog extends FwWindow {
    private static final Log LOG = LogFactory.getLog(FwLoginDialog.class);
-   private static final long serialVersionUID = 8560087121218645594L;
    private FwApplication application;
    private FwTranslator translator;
    private FwParameters parameters;

@@ -27,9 +27,9 @@ import com.vaadin.terminal.Terminal;
 import com.vaadin.terminal.gwt.server.HttpServletRequestListener;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
 
+@SuppressWarnings("serial")
 public abstract class FwApplication extends Application implements HttpServletRequestListener {
    private static final Log LOG = LogFactory.getLog(FwApplication.class);
-   private static final long serialVersionUID = 5473629791987132392L;
    private FwThreadLocalPattern threadLocal;
    private FwParameters parameters;
    private FwTranslator translator;

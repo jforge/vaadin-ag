@@ -6,8 +6,8 @@ import agrepository.framework.extensions.FwApplication;
 
 import com.vaadin.data.validator.AbstractValidator;
 
+@SuppressWarnings("serial")
 public class FwMinMaxValidator extends AbstractValidator {
-   private static final long serialVersionUID = 9139551460686391214L;
    private Object minValue;
    private Object maxValue;
    private boolean validMinValue;

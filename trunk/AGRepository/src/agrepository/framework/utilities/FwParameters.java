@@ -13,7 +13,6 @@ import agrepository.framework.extensions.FwApplication;
 
 public class FwParameters extends CompositeConfiguration {
    private static final Log LOG = LogFactory.getLog(FwParameters.class);
-   private static final long serialVersionUID = -6931501892578360133L;
    private String parametersFile;
 
    public FwParameters() {

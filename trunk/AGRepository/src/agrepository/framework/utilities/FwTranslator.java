@@ -1,6 +1,5 @@
 package agrepository.framework.utilities;
 
-import java.io.Serializable;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
@@ -9,10 +8,9 @@ import org.apache.commons.logging.LogFactory;
 
 import agrepository.framework.extensions.FwApplication;
 
-public class FwTranslator implements Serializable {
+public class FwTranslator {
    @SuppressWarnings("unused")
    private static final Log LOG = LogFactory.getLog(FwTranslator.class);
-   private static final long serialVersionUID = 6987591647465154990L;
    private ResourceBundle resourceBundle = null;
 
    public FwTranslator() {
