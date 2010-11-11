@@ -8,5 +8,4 @@ import agrepository.framework.utilities.FwUserData;
 public class ApplicationUserData extends FwUserData {
    @SuppressWarnings("unused")
    private static final Log LOG = LogFactory.getLog(ApplicationUserData.class);
-   private static final long serialVersionUID = 5913175130513788490L;
 }

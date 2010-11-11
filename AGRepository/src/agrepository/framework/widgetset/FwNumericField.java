@@ -9,9 +9,9 @@ import com.vaadin.terminal.PaintTarget;
 import com.vaadin.ui.ClientWidget;
 import com.vaadin.ui.TextField;
 
+@SuppressWarnings("serial")
 @ClientWidget(VFwNumericField.class)
 public class FwNumericField extends TextField {
-   private static final long serialVersionUID = 6093861878864667151L;
    private boolean onlyIntegerValues;
    private Object minValue;
    private Object maxValue;

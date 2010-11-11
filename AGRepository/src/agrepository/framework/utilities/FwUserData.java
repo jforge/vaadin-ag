@@ -1,16 +1,13 @@
 package agrepository.framework.utilities;
 
-import java.io.Serializable;
-
 import oracle.jdbc.OracleConnection;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class FwUserData implements Serializable {
+public class FwUserData {
    @SuppressWarnings("unused")
    private static final Log LOG = LogFactory.getLog(FwUserData.class);
-   private static final long serialVersionUID = -3076730510726507250L;
    private String username;
    private String name;
    private String email;

@@ -5,10 +5,12 @@ import agrepository.framework.extensions.FwWindow;
 import agrepository.framework.utilities.FwParameters;
 import agrepository.framework.utilities.FwTranslator;
 
+@SuppressWarnings("serial")
 public class FwLogoutDialog extends FwWindow {
-   private static final long serialVersionUID = 7039738281673779753L;
    private FwApplication application;
+   @SuppressWarnings("unused")
    private FwTranslator translator;
+   @SuppressWarnings("unused")
    private FwParameters parameters;
 
    public void show() {

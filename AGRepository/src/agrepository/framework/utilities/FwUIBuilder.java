@@ -1,7 +1,5 @@
 package agrepository.framework.utilities;
 
-import java.io.Serializable;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -10,10 +8,9 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.Window;
 
-public class FwUIBuilder implements Serializable {
+public class FwUIBuilder {
    @SuppressWarnings("unused")
    private static final Log LOG = LogFactory.getLog(FwUIBuilder.class);
-   private static final long serialVersionUID = -2607922449734683983L;
    private ComponentContainer container;
 
    public FwUIBuilder(ComponentContainer container) {

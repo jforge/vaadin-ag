@@ -8,10 +8,10 @@ import agrepository.framework.utilities.FwUIBuilder;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.VerticalLayout;
 
+@SuppressWarnings("serial")
 public abstract class FwComponent extends CustomComponent {
    @SuppressWarnings("unused")
    private static final Log LOG = LogFactory.getLog(FwComponent.class);
-   private static final long serialVersionUID = -4988692704729896908L;
    private VerticalLayout rootLayout;
    private FwUIBuilder uiBuilder;
 

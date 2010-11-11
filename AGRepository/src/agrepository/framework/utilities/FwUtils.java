@@ -1,16 +1,13 @@
 package agrepository.framework.utilities;
 
-import java.io.Serializable;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.vaadin.terminal.gwt.server.JsonPaintTarget;
 
-public class FwUtils implements Serializable {
+public class FwUtils {
    @SuppressWarnings("unused")
    private static final Log LOG = LogFactory.getLog(FwUtils.class);
-   private static final long serialVersionUID = 7563323290240919946L;
 
    public static String escapeXML(String value) {
       return value == null ? null : JsonPaintTarget.escapeXML(value);

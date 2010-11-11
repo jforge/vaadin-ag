@@ -17,10 +17,10 @@ import com.vaadin.ui.Upload.FinishedEvent;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.CloseEvent;
 
+@SuppressWarnings("serial")
 public class FwEvent implements Serializable {
    @SuppressWarnings("unused")
    private static final Log LOG = LogFactory.getLog(FwEvent.class);
-   private static final long serialVersionUID = -2603225525242512107L;
    private Button.ClickEvent clickEvent;
    private Property.ValueChangeEvent valueChangeEvent;
    private FinishedEvent finishedEvent;
@@ -39,6 +39,7 @@ public class FwEvent implements Serializable {
    private CloseEvent closeEvent;
    private int[] modifiers;
    private int key;
+   @SuppressWarnings("unused")
    private FwApplication application;
 
    public FwEvent() {

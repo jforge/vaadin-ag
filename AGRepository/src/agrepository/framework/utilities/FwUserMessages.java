@@ -3,7 +3,6 @@ package agrepository.framework.utilities;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.io.Serializable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,10 +12,9 @@ import agrepository.framework.extensions.FwApplication;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.Window.Notification;
 
-public class FwUserMessages implements Serializable {
+public class FwUserMessages {
    @SuppressWarnings("unused")
    private static final Log LOG = LogFactory.getLog(FwUserMessages.class);
-   private static final long serialVersionUID = -2353972624960242281L;
    private Window window;
    private FwApplication application;
    private FwTranslator translator;
