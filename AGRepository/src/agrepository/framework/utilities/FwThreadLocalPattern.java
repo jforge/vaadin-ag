@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import agrepository.framework.extensions.FwApplication;
+import agrepository.framework.FwApplication;
 
 import com.vaadin.Application;
 import com.vaadin.service.ApplicationContext;

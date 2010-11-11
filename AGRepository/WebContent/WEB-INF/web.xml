@@ -15,7 +15,7 @@
    </context-param>
    <servlet>
       <servlet-name>AG Repository Application</servlet-name>
-      <servlet-class>agrepository.framework.extensions.FwApplicationServlet</servlet-class>
+      <servlet-class>agrepository.framework.FwApplicationServlet</servlet-class>
       <init-param>
          <description>Vaadin application class to start</description>
          <param-name>application</param-name>

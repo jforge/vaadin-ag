@@ -6,16 +6,15 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import agrepository.framework.extensions.FwApplication;
-import agrepository.framework.extensions.FwEvent;
-import agrepository.framework.extensions.FwListener;
-import agrepository.framework.extensions.FwWindow;
+import agrepository.framework.FwApplication;
+import agrepository.framework.FwEvent;
+import agrepository.framework.FwListener;
+import agrepository.framework.FwWindow;
+import agrepository.framework.buttons.FwDefaultButton;
 import agrepository.framework.utilities.FwParameters;
 import agrepository.framework.utilities.FwTranslator;
 
-import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -55,9 +54,7 @@ public class FwLoginDialog extends FwWindow {
       form.addField("password", tfPassword);
       VerticalLayout footerLayout = new VerticalLayout();
       form.setFooter(footerLayout);
-      Button button = new Button(translator.get("login.label.enter"));
-      button.setClickShortcut(KeyCode.ENTER, null);
-      button.addStyleName("primary");
+      FwDefaultButton button = new FwDefaultButton(translator.get("login.label.enter"));
       button.addListener(new FwListener() {
          private static final long serialVersionUID = 1159486070944237738L;
 
@@ -105,6 +102,7 @@ public class FwLoginDialog extends FwWindow {
       if (checkUser(usernameAutologin, passwordAutologin)) {
          hide();
       } else {
+         requestRepaint();
          application.getMainWindow().addWindow(this);
       }
    }
