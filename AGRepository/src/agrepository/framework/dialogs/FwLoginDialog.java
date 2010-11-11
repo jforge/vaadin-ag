@@ -73,6 +73,8 @@ public class FwLoginDialog extends FwWindow {
    }
 
    public boolean checkUser(String username, String password) {
+      LOG.debug("username: " + username);
+      LOG.debug("password: " + password);
       // TODO: proveriti u bazi korisnika i lozinku sa MD5 podacima
       // TODO: ako je ok i ako je autologin onda staviti u kolacic oba podatka
       // TODO: ako je ok i ako nije autologin onda pobrisati kolacic
@@ -104,10 +106,12 @@ public class FwLoginDialog extends FwWindow {
    }
 
    public void hide() {
+      LOG.debug("start");
       if (isVisible()) {
          setVisible(false);
          application.getMainWindow().removeWindow(this);
       }
       application.createUI();
+      LOG.debug("end");
    }
 }
