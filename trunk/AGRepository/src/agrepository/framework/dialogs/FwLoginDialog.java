@@ -102,7 +102,6 @@ public class FwLoginDialog extends FwWindow {
       if (checkUser(usernameAutologin, passwordAutologin)) {
          hide();
       } else {
-         requestRepaint();
          application.getMainWindow().addWindow(this);
       }
    }
