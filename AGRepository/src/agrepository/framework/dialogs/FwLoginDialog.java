@@ -2,6 +2,7 @@ package agrepository.framework.dialogs;
 
 import javax.servlet.http.Cookie;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -24,11 +25,9 @@ public class FwLoginDialog extends FwWindow {
    private FwApplication application;
    private FwTranslator translator;
    private FwParameters parameters;
-   private String usernameAutologin;
-   private String passwordAutologin;
    private Form form;
-   private TextField username;
-   private TextField password;
+   private TextField tfUsername;
+   private TextField tfPassword;
 
    @Override
    public void createUI() {
@@ -44,15 +43,14 @@ public class FwLoginDialog extends FwWindow {
       form = new Form();
       form.getLayout().setMargin(true);
       form.setCaption(translator.get("login.title"));
-      username = new TextField(translator.get("login.label.username"));
-      username.setNullRepresentation("");
-      username.setValue(usernameAutologin);
-      username.setRequired(true);
-      form.addField("username", username);
-      password = new TextField(translator.get("login.label.password"));
-      password.setRequired(true);
-      password.setSecret(true);
-      form.addField("password", password);
+      tfUsername = new TextField(translator.get("login.label.username"));
+      tfUsername.setNullRepresentation("");
+      tfUsername.setRequired(true);
+      form.addField("username", tfUsername);
+      tfPassword = new TextField(translator.get("login.label.password"));
+      tfPassword.setRequired(true);
+      tfPassword.setSecret(true);
+      form.addField("password", tfPassword);
       VerticalLayout footerLayout = new VerticalLayout();
       form.setFooter(footerLayout);
       Button button = new Button(translator.get("login.label.enter"));
@@ -62,7 +60,8 @@ public class FwLoginDialog extends FwWindow {
          @Override
          public void execute(FwEvent event) throws Exception {
             try {
-               checkUser(username.getValue().toString(), password.getValue().toString());
+               checkUser(DigestUtils.md5Hex(tfUsername.getValue().toString()),
+                        DigestUtils.md5Hex(tfPassword.getValue().toString()));
                hide();
             } catch (Exception exception) {
                LOG.error(null, exception);
@@ -75,19 +74,28 @@ public class FwLoginDialog extends FwWindow {
    }
 
    public void checkUser(String username, String password) throws Exception {
-      // TODO: proveriti u bazi korisnika
+      LOG.debug(String.format("username: %s, password: %s", username, password));
+      // TODO: proveriti u bazi korisnika i lozinku sa MD5 podacima
+      // TODO: ako je ok i ako zeli autologin onda staviti u kolacic oba podatka
+      // TODO: ako ne zeli autologin onda pobrisati kolacic
       throw new Exception();
    }
 
    public void show() {
       Cookie[] cookies = application.getHttpServletRequest().getCookies();
+      String autologinKey = null;
+      String usernameAutologin = null;
+      String passwordAutologin = null;
       if (cookies != null) {
          for (Cookie cookie : cookies) {
-            if (cookie.getName().equals(parameters.getString("cookie.usernameKey"))) {
-               usernameAutologin = cookie.getValue();
-            } else if (cookie.getName().equals(parameters.getString("cookie.passwordKey"))) {
-               passwordAutologin = cookie.getValue();
+            if (cookie.getName().equals(parameters.getString("cookie.autologinKey"))) {
+               autologinKey = cookie.getValue();
+               break;
             }
+         }
+         if (autologinKey != null) {
+            usernameAutologin = autologinKey.substring(1, 32);
+            passwordAutologin = autologinKey.substring(32);
          }
       }
       try {
