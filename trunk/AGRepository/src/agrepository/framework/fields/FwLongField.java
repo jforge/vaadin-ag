@@ -1,4 +1,4 @@
-package agrepository.framework.extensions.fields;
+package agrepository.framework.fields;
 
 import agrepository.framework.widgetset.FwNumericField;
 

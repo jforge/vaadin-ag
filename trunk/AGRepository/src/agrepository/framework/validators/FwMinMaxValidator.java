@@ -1,8 +1,8 @@
-package agrepository.framework.extensions.validators;
+package agrepository.framework.validators;
 
 import java.text.MessageFormat;
 
-import agrepository.framework.extensions.FwApplication;
+import agrepository.framework.FwApplication;
 
 import com.vaadin.data.validator.AbstractValidator;
 

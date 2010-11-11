@@ -1,4 +1,4 @@
-package agrepository.framework.extensions;
+package agrepository.framework;
 
 import com.vaadin.terminal.gwt.server.ApplicationServlet;
 

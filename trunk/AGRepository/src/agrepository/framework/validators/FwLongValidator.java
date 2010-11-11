@@ -1,17 +1,17 @@
-package agrepository.framework.extensions.validators;
+package agrepository.framework.validators;
 
 import com.vaadin.data.validator.AbstractStringValidator;
 
 @SuppressWarnings("serial")
-public class FwFloatValidator extends AbstractStringValidator {
-   public FwFloatValidator(String errorMessage) {
+public class FwLongValidator extends AbstractStringValidator {
+   public FwLongValidator(String errorMessage) {
       super(errorMessage);
    }
 
    @Override
    protected boolean isValidString(String value) {
       try {
-         Float.parseFloat(value);
+         Long.parseLong(value);
          return true;
       } catch (Exception e) {
          return false;

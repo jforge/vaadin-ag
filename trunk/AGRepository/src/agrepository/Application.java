@@ -3,9 +3,9 @@ package agrepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import agrepository.framework.extensions.FwApplication;
-import agrepository.framework.extensions.FwEvent;
-import agrepository.framework.extensions.FwListener;
+import agrepository.framework.FwApplication;
+import agrepository.framework.FwEvent;
+import agrepository.framework.FwListener;
 
 import com.vaadin.ui.Button;
 

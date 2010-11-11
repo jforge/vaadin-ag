@@ -1,7 +1,7 @@
 package agrepository.framework.dialogs;
 
-import agrepository.framework.extensions.FwApplication;
-import agrepository.framework.extensions.FwWindow;
+import agrepository.framework.FwApplication;
+import agrepository.framework.FwWindow;
 import agrepository.framework.utilities.FwParameters;
 import agrepository.framework.utilities.FwTranslator;
 
