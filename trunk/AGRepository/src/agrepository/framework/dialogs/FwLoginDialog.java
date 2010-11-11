@@ -13,6 +13,7 @@ import agrepository.framework.extensions.FwWindow;
 import agrepository.framework.utilities.FwParameters;
 import agrepository.framework.utilities.FwTranslator;
 
+import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Form;
@@ -46,6 +47,7 @@ public class FwLoginDialog extends FwWindow {
       tfUsername = new TextField(translator.get("login.label.username"));
       tfUsername.setNullRepresentation("");
       tfUsername.setRequired(true);
+      tfUsername.focus();
       form.addField("username", tfUsername);
       tfPassword = new TextField(translator.get("login.label.password"));
       tfPassword.setRequired(true);
@@ -54,6 +56,8 @@ public class FwLoginDialog extends FwWindow {
       VerticalLayout footerLayout = new VerticalLayout();
       form.setFooter(footerLayout);
       Button button = new Button(translator.get("login.label.enter"));
+      button.setClickShortcut(KeyCode.ENTER, null);
+      button.addStyleName("primary");
       button.addListener(new FwListener() {
          private static final long serialVersionUID = 1159486070944237738L;
 
