@@ -59,12 +59,11 @@ public class FwLoginDialog extends FwWindow {
 
          @Override
          public void execute(FwEvent event) throws Exception {
-            try {
-               checkUser(DigestUtils.md5Hex(tfUsername.getValue().toString()),
-                        DigestUtils.md5Hex(tfPassword.getValue().toString()));
+            if (checkUser(DigestUtils.md5Hex(tfUsername.getValue().toString()),
+                     DigestUtils.md5Hex(tfPassword.getValue().toString()))) {
                hide();
-            } catch (Exception exception) {
-               LOG.error(null, exception);
+            } else {
+               // TODO: prikazivanje gresaka
             }
          }
       });
@@ -73,12 +72,11 @@ public class FwLoginDialog extends FwWindow {
       addComponent(form);
    }
 
-   public void checkUser(String username, String password) throws Exception {
-      LOG.debug(String.format("username: %s, password: %s", username, password));
+   public boolean checkUser(String username, String password) {
       // TODO: proveriti u bazi korisnika i lozinku sa MD5 podacima
-      // TODO: ako je ok i ako zeli autologin onda staviti u kolacic oba podatka
-      // TODO: ako ne zeli autologin onda pobrisati kolacic
-      throw new Exception();
+      // TODO: ako je ok i ako je autologin onda staviti u kolacic oba podatka
+      // TODO: ako je ok i ako nije autologin onda pobrisati kolacic
+      return false;
    }
 
    public void show() {
@@ -98,18 +96,18 @@ public class FwLoginDialog extends FwWindow {
             passwordAutologin = autologinKey.substring(32);
          }
       }
-      try {
-         checkUser(usernameAutologin, passwordAutologin);
+      if (checkUser(usernameAutologin, passwordAutologin)) {
          hide();
-      } catch (Exception exception) {
-         LOG.error(null, exception);
+      } else {
          application.getMainWindow().addWindow(this);
       }
    }
 
    public void hide() {
-      setVisible(false);
-      application.getMainWindow().removeWindow(this);
+      if (isVisible()) {
+         setVisible(false);
+         application.getMainWindow().removeWindow(this);
+      }
       application.createUI();
    }
 }
