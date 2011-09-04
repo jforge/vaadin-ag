@@ -3,7 +3,7 @@
    <Service name="Catalina">
       <Connector port="8080" />
       <Engine defaultHost="localhost">
-         <Host name="localhost">
+         <Host name="localhost" >
             <Context docBase="AGRepository" path="/AGRepository" reloadable="true" source="org.eclipse.jst.jee.server:AGRepository" />
          </Host>
       </Engine>
